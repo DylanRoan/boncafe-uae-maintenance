@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".HomeActivity">
+
+    <ImageView
+        android:id="@+id/box_header"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:background="@drawable/box_header"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/box_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:background="@drawable/box_bottom"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/header_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserratt"
+        tools:layout_editor_absoluteX="183dp"
+        tools:layout_editor_absoluteY="278dp"
+        app:layout_constraintStart_toStartOf="@id/box_header"
+        app:layout_constraintEnd_toEndOf="@id/box_header"
+        app:layout_constraintBottom_toBottomOf="@id/box_header"
+        app:layout_constraintTop_toTopOf="@id/box_header"/>
+
+    <ImageView
+        android:id="@+id/icon_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/icon_menu"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="205dp"
+        app:layout_constraintStart_toStartOf="@id/box_header"
+        app:layout_constraintEnd_toEndOf="@id/box_header"
+        app:layout_constraintBottom_toBottomOf="@id/box_header"
+        app:layout_constraintTop_toTopOf="@id/box_header"
+        app:layout_constraintHorizontal_bias="0.06"/>
+
+    <ImageView
+        android:id="@+id/icon_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/icon_info"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="205dp"
+        app:layout_constraintStart_toStartOf="@id/box_header"
+        app:layout_constraintEnd_toEndOf="@id/box_header"
+        app:layout_constraintBottom_toBottomOf="@id/box_header"
+        app:layout_constraintTop_toTopOf="@id/box_header"
+        app:layout_constraintHorizontal_bias="0.94"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

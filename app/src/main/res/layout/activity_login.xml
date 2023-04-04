@@ -16,7 +16,7 @@
         android:gravity="center"
         android:text="Network Connection Error"
         android:textColor="#FFFFFF"
-        tools:ignore="Suspicious0dp" />
+        tools:ignore="HardcodedText,Suspicious0dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,7 +32,8 @@
             app:layout_constraintBottom_toTopOf="@id/login_window"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <!-- Need to change height to something less uh, static ?-->
         <!-- Login Window -->
@@ -50,30 +51,34 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/email_input"
+                android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Email" />
+                android:hint="Email"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
-                android:id="@+id/password_input"
+                android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Password" />
+                android:hint="Password"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
             <CheckBox
-                android:id="@+id/remember_me"
+                android:id="@+id/check_remember_me"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Remember me" />
+                android:text="Remember me"
+                tools:ignore="HardcodedText" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="#FF8300"
-                android:text="Get Started" />
+                android:text="Get Started"
+                tools:ignore="HardcodedText,TextContrastCheck" />
         </LinearLayout>
 
         <TextView
@@ -83,7 +88,8 @@
             android:gravity="center"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_window" />
+            app:layout_constraintTop_toBottomOf="@+id/login_window"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
