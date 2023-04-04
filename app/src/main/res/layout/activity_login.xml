@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginActivity"
-    android:background="#8A8A8A">
+    android:background="@drawable/bg_coffees">
 
     <TextView
         android:id="@+id/connection_error"
@@ -22,9 +22,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/logo_boncafe_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo_boncafe_white"
+            tools:layout_editor_absoluteX="142dp"
+            tools:layout_editor_absoluteY="35dp"
+            app:layout_constraintBottom_toTopOf="@id/login_window"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <!-- Need to change height to something less uh, static ?-->
+        <!-- Login Window -->
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/login_window"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -61,13 +74,6 @@
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="#FF8300"
                 android:text="Get Started" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No Account? Create one"
-                android:gravity="center"
-                android:textColor="#000000"/>
         </LinearLayout>
 
         <TextView
@@ -77,6 +83,7 @@
             android:gravity="center"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/login_window" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
