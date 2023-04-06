@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        // Go to home page
+        button2.setOnClickListener{
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

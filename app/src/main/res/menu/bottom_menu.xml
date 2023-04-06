@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/icon_home"
+        android:title="Home"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/booking"
+        android:icon="@drawable/icon_booking"
+        android:title="Booking"
+        tools:ignore="HardcodedText"/>
+
+    <item
+        android:id="@+id/maintenance"
+        android:icon="@drawable/icon_maintenance"
+        android:title="Maintenance"
+        tools:ignore="HardcodedText"/>
+
+    <item
+        android:id="@+id/serviceReport"
+        android:icon="@drawable/icon_service"
+        android:title="Reports"
+        tools:ignore="HardcodedText"/>
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/icon_settings"
+        android:title="Settings"
+        tools:ignore="HardcodedText"/>
+
+</menu>

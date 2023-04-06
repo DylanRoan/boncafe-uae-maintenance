@@ -11,6 +11,7 @@
         android:id="@+id/box_header"
         android:layout_width="match_parent"
         android:layout_height="100sp"
+        android:visibility="gone"
         android:background="@drawable/box_header"
         android:scaleType="centerInside"
         android:adjustViewBounds="true"
@@ -24,6 +25,7 @@
         android:id="@+id/box_bottom"
         android:layout_width="match_parent"
         android:layout_height="100sp"
+        android:visibility="gone"
         android:background="@drawable/box_bottom"
         android:scaleType="centerInside"
         android:adjustViewBounds="true"
@@ -37,6 +39,7 @@
         android:id="@+id/header_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="Home"
         android:textColor="@color/black"
         android:textSize="32sp"
@@ -54,6 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/icon_menu"
+        android:visibility="gone"
         tools:layout_editor_absoluteX="136dp"
         tools:layout_editor_absoluteY="205dp"
         app:layout_constraintStart_toStartOf="@id/box_header"
@@ -66,6 +70,7 @@
         android:id="@+id/icon_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:srcCompat="@drawable/icon_info"
         tools:layout_editor_absoluteX="136dp"
         tools:layout_editor_absoluteY="205dp"
@@ -74,4 +79,27 @@
         app:layout_constraintBottom_toBottomOf="@id/box_header"
         app:layout_constraintTop_toTopOf="@id/box_header"
         app:layout_constraintHorizontal_bias="0.94"/>
+
+    <!-- BOTTOM NAV MENU -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="409dp"
+        android:layout_height="833dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/my_nav" />
 </androidx.constraintlayout.widget.ConstraintLayout>
