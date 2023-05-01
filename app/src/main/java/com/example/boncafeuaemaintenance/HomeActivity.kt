@@ -23,7 +23,7 @@ class HomeActivity : AppCompatActivity() {
         // Make a functional BottomNavMenu
         bottomNavigationView.setupWithNavController(navController)
 
-        // Set up toolbar (top nav menu) with NavController
+        // Set up toolbar (top nav menu)
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
         actionBar?.setDisplayShowTitleEnabled(false) // disable default toolbar's title
