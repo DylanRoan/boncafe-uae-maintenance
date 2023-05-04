@@ -39,6 +39,7 @@ class Maintenance : Fragment() {
         }
     }
 
+    // Do main coding here
     @SuppressLint("NewApi", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,7 +72,10 @@ class Maintenance : Fragment() {
         return view
     }
 
-    // Calculate number of days ago since last maintenance date
+    /**
+     * Calculate number of days ago since last maintenance date
+     * @return number of days ago as int
+     * */
     @SuppressLint("NewApi")
     fun getDaysAgo(date: String): Int {
         // Calculate days ago

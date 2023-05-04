@@ -1,142 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
+    android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <ImageView
-        android:id="@+id/box_header"
-        android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:visibility="gone"
-        android:background="@drawable/box_header"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView
-        android:id="@+id/box_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:visibility="gone"
-        android:background="@drawable/box_bottom"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
     <TextView
-        android:id="@+id/header_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Home"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/montserratt"
-        tools:layout_editor_absoluteX="183dp"
-        tools:layout_editor_absoluteY="278dp"
-        app:layout_constraintStart_toStartOf="@id/box_header"
-        app:layout_constraintEnd_toEndOf="@id/box_header"
-        app:layout_constraintBottom_toBottomOf="@id/box_header"
-        app:layout_constraintTop_toTopOf="@id/box_header"/>
-
-    <ImageView
-        android:id="@+id/icon_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/icon_menu"
-        android:visibility="gone"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="205dp"
-        app:layout_constraintStart_toStartOf="@id/box_header"
-        app:layout_constraintEnd_toEndOf="@id/box_header"
-        app:layout_constraintBottom_toBottomOf="@id/box_header"
-        app:layout_constraintTop_toTopOf="@id/box_header"
-        app:layout_constraintHorizontal_bias="0.06"/>
-
-    <ImageView
-        android:id="@+id/icon_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:srcCompat="@drawable/icon_info"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="205dp"
-        app:layout_constraintStart_toStartOf="@id/box_header"
-        app:layout_constraintEnd_toEndOf="@id/box_header"
-        app:layout_constraintBottom_toBottomOf="@id/box_header"
-        app:layout_constraintTop_toTopOf="@id/box_header"
-        app:layout_constraintHorizontal_bias="0.94"/>
-
-    <!-- BOTTOM NAV MENU -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/connection_error"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"/>
+        android:layout_height="0dp"
+        android:background="#FF0000"
+        android:gravity="center"
+        android:text="Network Connection Error"
+        android:textColor="#FFFFFF"
+        tools:ignore="HardcodedText,Suspicious0dp" />
 
-    <!--  FRAGMENT (PAGE)  -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="410dp"
-        android:layout_height="775dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
-        app:navGraph="@navigation/my_nav" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!--  TOOLBAR (TOP NAV MENU)  -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/toolbar_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="408dp"
+        <ImageView
+            android:id="@+id/icon_menu"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="1dp"
-            android:backgroundTint="#fff" >
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
+            app:srcCompat="@drawable/icon_menu"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="205dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.06"/>
+
+        <ImageView
+            android:id="@+id/icon_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:srcCompat="@drawable/icon_info"
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="205dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.94"/>
+
+        <!-- BOTTOM NAV MENU -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_menu"/>
+
+        <!--  FRAGMENT (PAGES CONTAINER)  -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="410dp"
+            android:layout_height="775dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+            app:navGraph="@navigation/my_nav" />
+
+        <!--  TOOLBAR (TOP NAV MENU)  -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="408dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="HOME"
-                android:textSize="25sp"
-                android:textColor="#000000"
-                android:fontFamily="@font/montserratt"
-                android:textStyle="bold"
-                android:textAllCaps="true"
-                tools:ignore="HardcodedText" />
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                tools:layout_editor_absoluteX="1dp"
+                android:backgroundTint="#fff" >
 
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="HOME"
+                    android:textSize="25sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/montserratt"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

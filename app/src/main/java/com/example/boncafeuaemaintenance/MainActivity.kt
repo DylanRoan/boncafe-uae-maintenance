@@ -1,20 +1,26 @@
 package com.example.boncafeuaemaintenance
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.connection_error
 import org.json.JSONArray
 
 class MainActivity : AppCompatActivity() {
 
     var hasNetwork = false
 
+    @SuppressLint("InflateParams")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +53,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Go to login page
+        button3.setOnClickListener{
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun testFunction(context : Context, json : JSONArray) {
