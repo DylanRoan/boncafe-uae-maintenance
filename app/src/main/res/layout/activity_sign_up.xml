@@ -170,7 +170,7 @@
         android:text="* Please enter all blank fields"
         android:textColor="#ff0000"
         android:textSize="12sp"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,TextContrastCheck" />
 
     <TextView
         android:id="@+id/txt_warning_password"
@@ -181,7 +181,7 @@
         android:text="* Please confirm the correct password"
         android:textColor="#ff0000"
         android:textSize="12sp"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,TextContrastCheck" />
 
     <Button
         android:id="@+id/btn_createAccount"

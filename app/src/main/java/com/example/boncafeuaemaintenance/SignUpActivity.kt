@@ -23,21 +23,19 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Create SpannableString
+        // Referencing spannable substrings
         val textTerms = "By signing up, you agree to our Terms & Conditions and Privacy Policy"
-        val ss = SpannableString(textTerms)
+        val textTermsStartIndexArr = arrayOf(
+            "By signing up, you agree to our ".length,
+            "By signing up, you agree to our Terms & Conditions and ".length
+        )
+        val textTermsEndIndexArr = arrayOf(
+            "By signing up, you agree to our Terms & Conditions".length,
+            textTerms.length
+        )
+        val textTermsColors = arrayOf("#FF8300","#FF8300")
 
-        // Span first text
-        val textTermsFirstIndex = "By signing up, you agree to our ".length
-        val textTermsEndIndex = "By signing up, you agree to our Terms & Conditions".length
-
-        // Span second text
-        val textPrivacyFirstIndex = "By signing up, you agree to our Terms & Conditions and ".length
-        val textPrivacyEndIndex = textTerms.length
-
-        // Set color to a specific TextView's text
-        ss.setSpan(ForegroundColorSpan(Color.parseColor("#FF8300")), textTermsFirstIndex,textTermsEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        ss.setSpan(ForegroundColorSpan(Color.parseColor("#FF8300")), textPrivacyFirstIndex,textPrivacyEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        txt_terms.text = ss
+        // Set colors to two substrings of TextView
+        txt_terms.text = CustomFunctions().spanTextColor(textTerms, textTermsStartIndexArr, textTermsEndIndexArr, textTermsStartIndexArr.size, textTermsColors)
     }
 }
