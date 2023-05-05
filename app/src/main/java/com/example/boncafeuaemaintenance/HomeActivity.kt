@@ -48,7 +48,7 @@ class HomeActivity : AppCompatActivity() {
         // Click menu items listener for BottomNavMenu
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
 
-            // Change Toolbar's title depending the item selected
+            // Change Toolbar's title depending on the item selected
             for (i in 0 until bottomNavigationView.menu.size()){
                 val item = bottomNavigationView.menu.getItem(i)
                 if (item.itemId == menuItem.itemId){
