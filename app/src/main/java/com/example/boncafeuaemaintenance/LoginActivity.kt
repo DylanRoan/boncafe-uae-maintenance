@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Set color to a specific TextView's text
-        txt_createAccount.text = CustomFunctions().spanTextColor(txt_createAccount.text.toString(),arrayOf(12),arrayOf(txt_createAccount.text.toString().length),1,arrayOf("#FF8300"))
+        txt_createAccount.text = CustomFunctions().spanTextCustom(txt_createAccount.text.toString(),false,this,emptyArray(),arrayOf("Create one"),arrayOf("#FF8300"))
 
         // Click 'Login' Button
         btn_login.setOnClickListener {
