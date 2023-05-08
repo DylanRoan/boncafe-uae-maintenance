@@ -2,6 +2,7 @@ package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,6 +17,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONArray
 
 class LoginActivity : AppCompatActivity() {
 
@@ -44,7 +46,15 @@ class LoginActivity : AppCompatActivity() {
         // Click 'Login' Button
         btn_login.setOnClickListener {
             // Open pop-up window
-            popUpWindow()
+            //popUpWindow()
+
+            if (hasNetwork)
+            {
+                // Login
+                var password = input_password.text.toString()
+                var email = input_email.text.toString()
+                NetworkFunctions().loginRequest(this, "https://boncafe-backend.herokuapp.com/login", ::goHomePage, password, email)
+            }
         }
 
         // Click 'Create Account' TextView
@@ -52,6 +62,15 @@ class LoginActivity : AppCompatActivity() {
             // Go to Sign Up page
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    // Go to homepage after login
+    fun goHomePage(context : Context, json : JSONArray){
+        var jsonobj = json.getJSONObject(0)
+        if (jsonobj.has("confirmed"))
+        {
+            startActivity(Intent(context, HomeActivity::class.java))
         }
     }
 

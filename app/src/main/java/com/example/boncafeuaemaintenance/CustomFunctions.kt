@@ -10,8 +10,6 @@ import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 
 class CustomFunctions {
     /** To make substring(s) have their own color and clickable URL
@@ -19,12 +17,12 @@ class CustomFunctions {
      * @param _text Pass a text string (as String)
      * @param _clickableLink Make the substring clickable URL? (as Boolean)
      * @param _context Pass what context/activity it is (as Context)
-     * @param _link Pass URL(s) (as String Array)
+     * @param _links Pass URL(s) (as String Array)
      * @param _spanSubstrings Pass which substrings to be span (as String Array)
      * @param _colorInHex Pass colour hex code (as String Array)
      *
      * @return substring(s) with its set colour (as SpannableString) **/
-    fun spanTextCustom(_text: String, _clickableLink : Boolean, _context: Context,  _link: Array<String>, _spanSubstrings: Array<String>, _colorInHex: Array<String>): SpannableString {
+    fun spanTextCustom(_text: String, _clickableLink : Boolean, _context: Context,  _links: Array<String>, _spanSubstrings: Array<String>, _colorInHex: Array<String>): SpannableString {
         val spannableString = SpannableString(_text)
 
         for (i in _spanSubstrings.indices){
@@ -36,7 +34,7 @@ class CustomFunctions {
                     // Handle click events
                     override fun onClick(view: View) {
                         /*Toast.makeText(view.context, "Clicked $i", Toast.LENGTH_SHORT).show()*/
-                        openURL(_context, _link[i])
+                        openURL(_context, _links[i])
                     }
 
                     // Customize span text
@@ -55,13 +53,12 @@ class CustomFunctions {
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }
-            
         }
 
         return spannableString
     }
 
-    /** Open URL
+    /** To open URL
      * @param _context Pass context/activity (as Context)
      * @param _URL Pass URL (as string) **/
     fun openURL(_context: Context, _URL: String){

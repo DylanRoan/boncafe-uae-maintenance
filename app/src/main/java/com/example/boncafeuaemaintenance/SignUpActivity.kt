@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
+@Suppress("DEPRECATION")
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,9 +20,7 @@ class SignUpActivity : AppCompatActivity() {
 
         // Click 'Back' Button
         icon_btn_back.setOnClickListener {
-            // Go to Sign Up page
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            super.onBackPressed()
         }
 
         // // Set colors and clickable to TextView's substrings

@@ -125,7 +125,9 @@
                 android:backgroundTint="#FF8300"
                 android:text="LOG IN"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 android:fontFamily="@font/montserratt"
+                android:letterSpacing="0"
                 tools:ignore="HardcodedText,TextContrastCheck" />
 
             <TextView
