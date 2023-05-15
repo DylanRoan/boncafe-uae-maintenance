@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/ourWebsite"
+            android:icon="@drawable/icon_globe"
+            android:title="Our Website"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/aboutUs"
+            android:icon="@drawable/icon_aboutus"
+            android:title="About Us"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/contactUs"
+            android:icon="@drawable/icon_phone"
+            android:title="Contact Us"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/serviceMaintenance"
+            android:icon="@drawable/icon_wrench2"
+            android:title="Service &amp; Maintenance"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/spareParts"
+            android:icon="@drawable/icon_parts"
+            android:title="Spare Parts"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/browseProducts"
+            android:icon="@drawable/icon_products"
+            android:title="Browse Products"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/icon_logout"
+            android:title="Logout"
+            tools:ignore="HardcodedText" />
+    </group>
+<!--
+    <group
+        android:checkableBehavior="single">
+        <item android:title="Our Social Medias"
+            tools:ignore="HardcodedText">
+            <menu>
+                <item
+                    android:id="@+id/facebook"
+                    android:icon="@drawable/icon_facebook"
+                    android:title="Facebook"
+                    tools:ignore="HardcodedText" />
+            </menu>
+        </item>
+    </group>-->
+
+</menu>

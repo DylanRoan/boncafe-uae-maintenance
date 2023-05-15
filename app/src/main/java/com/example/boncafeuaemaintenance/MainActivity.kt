@@ -58,6 +58,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+
+        // GO to splash screen
+        button4.setOnClickListener {
+            val intent = Intent(this, OnBoardingScreen::class.java)
+            startActivity(intent)
+        }
     }
 
     fun testFunction(context : Context, json : JSONArray) {

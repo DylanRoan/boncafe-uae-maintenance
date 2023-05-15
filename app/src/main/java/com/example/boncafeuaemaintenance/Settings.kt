@@ -1,10 +1,17 @@
 package com.example.boncafeuaemaintenance
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +36,46 @@ class Settings : Fragment() {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        val view = inflater.inflate(R.layout.fragment_settings, container, false)
+
+        // References
+        val tabOfficeLocation = view.findViewById<ConstraintLayout>(R.id.tab_office_location)
+        val tabWarehouseLocation = view.findViewById<ConstraintLayout>(R.id.tab_warehouse_location)
+        val tabTerms = view.findViewById<ConstraintLayout>(R.id.tab_termsconditions)
+        val tabPrivacyPolicy = view.findViewById<ConstraintLayout>(R.id.tab_privacy)
+
+        // URLs
+        val urlOfficeLocation = "https://goo.gl/maps/pciQUq5mKUrhrABd8"
+        val urlWarehouseLocation = "https://goo.gl/maps/W5s1cT4D4x3AGAtt9"
+        val urlTerms = "https://www.boncafeme.ae/page/terms-conditions"
+        val urlPrivacyPolicy = "https://www.boncafeme.ae/page/privacy-policy"
+
+        // Store Tabs and URLs
+        val tabArrayWithLink = arrayOf(
+            arrayOf(tabOfficeLocation,urlOfficeLocation),
+            arrayOf(tabWarehouseLocation,urlWarehouseLocation),
+            arrayOf(tabTerms,urlTerms),
+            arrayOf(tabPrivacyPolicy,urlPrivacyPolicy)
+        )
+
+        // Make each tab open to their respective link
+        for (tab in tabArrayWithLink){
+            val targetConstLayout = tab[0] as ConstraintLayout
+            val targetURL = tab[1] as String
+
+            targetConstLayout.setOnClickListener{
+                CustomFunctions().openURL(view.context, targetURL)
+            }
+        }
+
+
+        return view
     }
 
     companion object {

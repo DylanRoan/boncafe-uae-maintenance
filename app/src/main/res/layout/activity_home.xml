@@ -1,114 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context=".HomeActivity">
 
-    <TextView
-        android:id="@+id/connection_error"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#FF0000"
-        android:gravity="center"
-        android:text="Network Connection Error"
-        android:textColor="#FFFFFF"
-        tools:ignore="HardcodedText,Suspicious0dp" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/icon_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/icon_menu"
-            android:visibility="gone"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="205dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.06"/>
-
-        <ImageView
-            android:id="@+id/icon_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:srcCompat="@drawable/icon_info"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="205dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"/>
-
-        <!-- BOTTOM NAV MENU -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_menu"/>
-
-        <!--  FRAGMENT (PAGES CONTAINER)  -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/connection_error"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
-            app:navGraph="@navigation/my_nav" />
+            android:background="#FF0000"
+            android:gravity="center"
+            android:text="Network Connection Error"
+            android:textColor="#FFFFFF"
+            tools:ignore="HardcodedText,Suspicious0dp" />
 
-        <!--  TOOLBAR (TOP NAV MENU)  -->
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/toolbar_layout"
+        <!-- CONTENT CONTAINER -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <ImageView
+                android:id="@+id/icon_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:srcCompat="@drawable/icon_info"
+                tools:layout_editor_absoluteX="136dp"
+                tools:layout_editor_absoluteY="205dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.94"
+                tools:ignore="ContentDescription" />
+
+            <!-- BOTTOM NAV MENU -->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_gradient"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                tools:layout_editor_absoluteX="1dp">
+                android:background="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/bottom_menu"/>
 
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
+            <!--  FRAGMENT (PAGES CONTAINER)  -->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+                app:navGraph="@navigation/my_nav" />
+
+            <!--  TOOLBAR (TOP NAV MENU)  -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="HOME"
+                    android:background="@drawable/custom_gradient"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="?attr/actionBarTheme"
+                    tools:layout_editor_absoluteX="1dp">
+
+                    <ImageView
+                        android:id="@+id/icon_menu"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="left"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        app:srcCompat="@drawable/baseline_menu_white_24"
+                        tools:ignore="ContentDescription,ImageContrastCheck,UnusedAttribute" />
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="HOME"
+                        android:textSize="25sp"
+                        android:textColor="#fff"
+                        android:fontFamily="@font/montserratt"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        tools:ignore="HardcodedText" />
+
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <!-- DRAWER MENU -->
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_menu">
+
+        <!--SOCIAL MEDIAS CONTAINER-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Follow Us"
                     android:textSize="25sp"
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     android:fontFamily="@font/montserratt"
                     android:textStyle="bold"
-                    android:textAllCaps="true"
-                    tools:ignore="HardcodedText" />
+                    android:textAlignment="center"
+                    tools:ignore="HardcodedText"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <ImageView
+                    android:id="@+id/icon_facebook"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    app:srcCompat="@drawable/icon_facebook"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+                <ImageView
+                    android:id="@+id/icon_instagram"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    app:srcCompat="@drawable/icon_instagram"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+                <ImageView
+                    android:id="@+id/icon_youtube"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    app:srcCompat="@drawable/icon_youtube"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+            </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </com.google.android.material.navigation.NavigationView>
 
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

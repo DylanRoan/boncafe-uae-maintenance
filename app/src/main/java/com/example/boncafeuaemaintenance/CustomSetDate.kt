@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.View
 import android.widget.TextView
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class SetDate{
     // Set last maintenance date
@@ -47,8 +49,22 @@ class SetDate{
         val txtContractStartDate = view.findViewById<TextView>(R.id.txt_start_date)
         val txtContractEndDate = view.findViewById<TextView>(R.id.txt_end_date)
         txtContractDaysLeft.text = "($daysLeft Days Left)"
-        txtContractStartDate.text = contractStartDate.substring(0,10)
-        txtContractEndDate.text = contractEndDate.substring(0,10)
+        txtContractStartDate.text = contractStartDate.substring(0,10) //THIS VIEW IS GONE
+        txtContractEndDate.text = contractEndDate.substring(0,10) // THIS VIEW IS GONE
+
+        // Update Contract's Start Date
+        val (startDay,startMonth,startYear) = passSeperateDate(contractStartDate)
+        val txtStartDay = view.findViewById<TextView>(R.id.txt_start_day)
+        txtStartDay.text = "$startDay"
+        val txtStartMonthYear = view.findViewById<TextView>(R.id.txt_start_month_year)
+        txtStartMonthYear.text = "$startMonth, $startYear"
+
+        // Update Contract's ENd Date
+        val (endDay,endMonth,endYear) = passSeperateDate(contractEndDate)
+        val txtEndDay = view.findViewById<TextView>(R.id.txt_end_day)
+        txtEndDay.text = "$endDay"
+        val txtEndMonthYear = view.findViewById<TextView>(R.id.txt_end_month_year)
+        txtEndMonthYear.text = "$endMonth, $endYear"
 
         // Update days left text color
         if (daysLeft <= 7) txtContractDaysLeft.setTextColor(Color.parseColor("#FF0000"))
@@ -86,5 +102,35 @@ class SetDate{
         val daysLeft = futureDate.toEpochDay() - currentDate.toEpochDay()
 
         return daysLeft.toInt()
+    }
+
+    /**
+     * To convert date to another date format
+     * @param passDate Pass a date as "yyyy-MM-dd" (as String)
+     * @return new date format
+     * */
+    fun formatDateConvert(passDate: String?): String {
+        val oldDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val newDateFormat = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
+
+        val date = oldDateFormat.parse(passDate)
+        return newDateFormat.format(date)
+    }
+
+    /**
+     * To convert format date into day, month and year separately
+     * @param passDate Pass a date as "yyyy-MM-dd" (as String)
+     * @return day, month, year in separate variables
+     * */
+    fun passSeperateDate(passDate: String): Triple<String, String, String> {
+        val oldDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        val date = oldDateFormat.parse(passDate)
+
+        val day = SimpleDateFormat("dd", Locale.getDefault()).format(date)
+        val month = SimpleDateFormat("MMM", Locale.getDefault()).format(date)
+        val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
+
+        return Triple(day, month, year)
     }
 }

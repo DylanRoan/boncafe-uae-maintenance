@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:gravity="center"
+        android:orientation="vertical">
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/img_onboard_1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/montserratt"
+            android:text="Service Booking"
+            android:textAlignment="center"
+            android:textColor="#FF8300"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute,TextContrastCheck" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/montserratt"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="30dp"
+            android:text="Book a service for coffee machine repairs or maintenance"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+    </LinearLayout>
+
+</LinearLayout>

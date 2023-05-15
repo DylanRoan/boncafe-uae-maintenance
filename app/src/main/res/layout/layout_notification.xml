@@ -21,9 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_border_outline"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:padding="10dp"
             android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            tools:ignore="UnusedAttribute">
 
             <!-- IMAGE CONTAINER-->
             <LinearLayout
@@ -34,7 +36,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/txt_notif_image"
+                    android:id="@+id/img_notif"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="center"

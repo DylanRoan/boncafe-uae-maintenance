@@ -29,7 +29,7 @@
                 android:layout_height="110dp"
                 android:layout_marginBottom="10dp"
                 android:autoStart="true"
-                android:flipInterval="2000"
+                android:flipInterval="3000"
                 android:inAnimation="@anim/slide_in_right"
                 android:outAnimation="@anim/slide_out_left">
                 <androidx.cardview.widget.CardView
@@ -165,14 +165,7 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
-        <!-- RECENT CONTAINER -->
-        <LinearLayout
-            android:id="@+id/linearLayout_recent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!-- HEADER -->
+            <!-- RECENT HEADER -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,7 +177,44 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText,UnusedAttribute" />
-        </LinearLayout>
+
+            <!-- RECENT CONTAINER -->
+            <LinearLayout
+                android:id="@+id/linearLayout_recent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- Child notification views will be added here -->
+            </LinearLayout>
+
+            <!--No Recent Notifications-->
+            <RelativeLayout
+                android:id="@+id/layout_noRecent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+                <ImageView
+                    android:id="@+id/img_norecent"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:layout_centerHorizontal="true"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/img_norecent"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/img_norecent"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/montserratt"
+                    android:text="No Recent Notifications"
+                    android:textColor="#CDCDCD"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    tools:ignore="HardcodedText,UnusedAttribute" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

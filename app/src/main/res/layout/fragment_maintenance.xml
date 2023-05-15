@@ -23,6 +23,7 @@
 
             <!-- CONTRACT PERIOD CONTAINER -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/AMC_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -83,13 +84,107 @@
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
+                    <!--DATES-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <!-- START DATE -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                app:srcCompat="@drawable/img_date_start"
+                                tools:ignore="ContentDescription,ImageContrastCheck" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:id="@+id/txt_start_day"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/montserratt"
+                                    android:padding="1dp"
+                                    android:text="01"
+                                    android:textAlignment="center"
+                                    android:textColor="#000"
+                                    android:textSize="35sp"
+                                    android:textStyle="bold"
+                                    tools:ignore="HardcodedText,UnusedAttribute" />
+                                <TextView
+                                    android:id="@+id/txt_start_month_year"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/montserratt"
+                                    android:text="JAN, 2020"
+                                    android:textAlignment="center"
+                                    android:textColor="#000"
+                                    android:textSize="13sp"
+                                    tools:ignore="HardcodedText,UnusedAttribute" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <!-- END DATE -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                app:srcCompat="@drawable/img_date_end"
+                                tools:ignore="ContentDescription,ImageContrastCheck" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:id="@+id/txt_end_day"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/montserratt"
+                                    android:padding="1dp"
+                                    android:text="01"
+                                    android:textAlignment="center"
+                                    android:textColor="#000"
+                                    android:textSize="35sp"
+                                    android:textStyle="bold"
+                                    tools:ignore="HardcodedText,UnusedAttribute" />
+                                <TextView
+                                    android:id="@+id/txt_end_month_year"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/montserratt"
+                                    android:text="JAN, 2020"
+                                    android:textAlignment="center"
+                                    android:textColor="#000"
+                                    android:textSize="13sp"
+                                    tools:ignore="HardcodedText,UnusedAttribute" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <!-- START DATE -->
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/txt_start_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -104,6 +199,7 @@
 
                         <!-- END DATE -->
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/txt_end_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -150,6 +246,7 @@
 
             <!-- LAST MAINTENANCE DATE CONTAINER -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/lastMaintenance_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

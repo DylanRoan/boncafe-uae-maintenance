@@ -47,5 +47,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17' // For GIFs
+    implementation 'com.squareup.picasso:picasso:2.71828' // For Loading Image URL
+    implementation 'me.relex:circleindicator:2.1.6' // indicator for viewpager
+
+    //def lifecycle_version = "2.6.1"
+
+    // ViewModel
+    //implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // LiveData
+    //implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0" // ViewModel
 }

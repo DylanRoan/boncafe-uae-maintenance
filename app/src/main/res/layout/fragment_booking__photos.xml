@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Booking_Photos">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/montserratt"
+        android:padding="5dp"
+        android:text="Please take photos of your coffee machines"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,UnusedAttribute" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_above="@id/btn_uploadPhoto">
+
+        <LinearLayout
+            android:id="@+id/images_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_uploadPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:backgroundTint="#FF8300"
+        android:text="UPLOAD PHOTO"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserratt"
+        android:letterSpacing="0"
+        tools:ignore="HardcodedText,TextContrastCheck" />
+</RelativeLayout>

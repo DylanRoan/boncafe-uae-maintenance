@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/booking_pages"
+    app:startDestination="@id/bookingCoffeeMachines">
+    <fragment
+        android:id="@+id/bookingCoffeeMachines"
+        android:name="com.example.boncafeuaemaintenance.BookingCoffeeMachines"
+        android:label="fragment_booking_coffee_machines"
+        tools:layout="@layout/fragment_booking_coffee_machines" />
+    <fragment
+        android:id="@+id/bookingContactProblem"
+        android:name="com.example.boncafeuaemaintenance.BookingContactProblem"
+        android:label="fragment_booking_contact_problem"
+        tools:layout="@layout/fragment_booking_contact_problem" />
+    <fragment
+        android:id="@+id/booking_Photos"
+        android:name="com.example.boncafeuaemaintenance.Booking_Photos"
+        android:label="fragment_booking__photos"
+        tools:layout="@layout/fragment_booking__photos" />
+    <fragment
+        android:id="@+id/bookingLocation"
+        android:name="com.example.boncafeuaemaintenance.BookingLocation"
+        android:label="fragment_booking_location"
+        tools:layout="@layout/fragment_booking_location" />
+    <fragment
+        android:id="@+id/bookingSummary"
+        android:name="com.example.boncafeuaemaintenance.BookingSummary"
+        android:label="fragment_booking_summary"
+        tools:layout="@layout/fragment_booking_summary" />
+</navigation>

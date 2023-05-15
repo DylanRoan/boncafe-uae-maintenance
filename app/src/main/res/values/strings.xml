@@ -5,4 +5,8 @@
 
     <!-- CUSTOM STRINGS -->
     <string name="resend"><u>Resend</u></string>
+
+    <!-- DRAWER MENU THINGS -->
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
 </resources>

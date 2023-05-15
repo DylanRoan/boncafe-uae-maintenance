@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".BookingLocation">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/montserratt"
+        android:padding="5dp"
+        android:text="Where is your location?"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,UnusedAttribute" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_above="@id/btn_markLocation"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_markLocation"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:backgroundTint="#FF8300"
+        android:text="MARK LOCATION"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserratt"
+        android:letterSpacing="0"
+        tools:ignore="HardcodedText,TextContrastCheck" />
+
+</RelativeLayout>

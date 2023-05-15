@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_maintenance.*
 import org.w3c.dom.Text
 import java.time.format.DateTimeFormatter
@@ -72,17 +74,20 @@ class Maintenance : Fragment() {
             "Coffee Machine 1" to mapOf(
                 "Model No" to "834923",
                 "Serial No" to "EZDDBXSO",
-                "Purchased date" to "2022-01-01"
+                "Purchased date" to "2022-01-01",
+                "Image" to "https://i.imgur.com/7NNXknZ.png"
             ),
             "Coffee Machine 2" to mapOf(
                 "Model No" to "654234",
                 "Serial No" to "KWNDJFNE",
-                "Purchased date" to "2022-05-03"
+                "Purchased date" to "2022-05-03",
+                "Image" to "https://i.imgur.com/78RQ5MU.png"
             ),
             "Coffee Machine 3" to mapOf(
                 "Model No" to "133742",
                 "Serial No" to "QWERTYU",
-                "Purchased date" to "2022-09-06"
+                "Purchased date" to "2022-09-06",
+                "Image" to "https://i.imgur.com/o8k9oRs.png"
             ),
         )
 
@@ -90,14 +95,16 @@ class Maintenance : Fragment() {
         for (i in coffeeMachineDetails){
             val layoutCoffeeMachine = layoutInflater.inflate(R.layout.container_coffee_machine, null, false)
             val txtCoffeeMachineName = layoutCoffeeMachine.findViewById<TextView>(R.id.txt_coffeeMachineName)
+            val imgCoffeeMachine = layoutCoffeeMachine.findViewById<ImageView>(R.id.img_coffeeMachine)
             val txtModelNo = layoutCoffeeMachine.findViewById<TextView>(R.id.txt_modelNo)
             val txtSerial = layoutCoffeeMachine.findViewById<TextView>(R.id.txt_serialNo)
             val txtPurchased = layoutCoffeeMachine.findViewById<TextView>(R.id.txt_purchasedDate)
 
             txtCoffeeMachineName.text = i.key
+            Picasso.get().load(i.value["Image"]).into(imgCoffeeMachine)
             txtModelNo.text = i.value["Model No"]
             txtSerial.text = i.value["Serial No"]
-            txtPurchased.text = i.value["Purchased date"]
+            txtPurchased.text = SetDate().formatDateConvert(i.value["Purchased date"])
 
             mainLayout.addView(layoutCoffeeMachine)
         }

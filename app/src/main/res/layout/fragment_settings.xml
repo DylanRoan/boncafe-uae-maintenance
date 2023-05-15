@@ -19,12 +19,443 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
+
+            <!-- CONTACT US -->
+            <LinearLayout
+                android:id="@+id/linearLayout_contactUs"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Settings"
-                android:textStyle="bold"
-                android:textSize="30dp"/>
+                android:layout_gravity="center_horizontal"
+                android:paddingHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <!--HEADER-->
+                <TextView
+                    android:id="@+id/txt_contactUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="5dp"
+                    android:text="Contact Us"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:fontFamily="@font/montserratt"
+                    tools:ignore="HardcodedText" />
+
+                <!--PHONE NUMBER-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/img_icon_phone"
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/baseline_local_phone_24"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_phonenumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="+971 40 7059000"
+                            android:textSize="18sp"
+                            android:textColor="#000"
+                            android:fontFamily="@font/montserratt"
+                            app:layout_constraintLeft_toRightOf="@id/img_icon_phone"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--EMAIL-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/img_icon_email"
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/baseline_email_24"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="info.bme@boncafeme.ae"
+                            android:textSize="18sp"
+                            android:textColor="#000"
+                            android:fontFamily="@font/montserratt"
+                            app:layout_constraintLeft_toRightOf="@id/img_icon_email"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- OUR LOCATION -->
+            <LinearLayout
+                android:id="@+id/linearLayout_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <!--HEADER-->
+                <TextView
+                    android:id="@+id/txt_ourlocaion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="5dp"
+                    android:text="Our Location"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:fontFamily="@font/montserratt"
+                    tools:ignore="HardcodedText" />
+
+                <!--OFFICE LOCATION-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/tab_office_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="5dp"
+                        tools:ignore="UnusedAttribute">
+
+                        <ImageView
+                            android:id="@+id/img_icon_location1"
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/baseline_location_on_24"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_locationOffice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="Office Location"
+                            android:textSize="18sp"
+                            android:textColor="#000"
+                            android:fontFamily="@font/montserratt"
+                            app:layout_constraintLeft_toRightOf="@id/img_icon_location1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                        <ImageView
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/baseline_arrow_forward_ios_24"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--WAREHOUSE LOCATION-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/tab_warehouse_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/img_icon_location2"
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/baseline_location_on_24"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_locationWarehouse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="Warehouse Location"
+                            android:textSize="18sp"
+                            android:textColor="#000"
+                            android:fontFamily="@font/montserratt"
+                            app:layout_constraintLeft_toRightOf="@id/img_icon_location2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                        <ImageView
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/baseline_arrow_forward_ios_24"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- HELP -->
+            <LinearLayout
+                android:id="@+id/linearLayout_help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <!--HEADER-->
+                <TextView
+                    android:id="@+id/txt_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="5dp"
+                    android:text="Help"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:fontFamily="@font/montserratt"
+                    tools:ignore="HardcodedText" />
+
+                <!--TERMS CONDITIONS-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/tab_termsconditions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="5dp"
+                        tools:ignore="UnusedAttribute">
+
+                        <ImageView
+                            android:id="@+id/img_icon_terms"
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/icon_terms"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_terms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="Terms &amp; Condition"
+                            android:textSize="18sp"
+                            android:textColor="#000"
+                            android:fontFamily="@font/montserratt"
+                            app:layout_constraintLeft_toRightOf="@id/img_icon_terms"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                        <ImageView
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/baseline_arrow_forward_ios_24"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--WAREHOUSE LOCATION-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/tab_privacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/img_privacy"
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/icon_privacy"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_policy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="Privacy Policy"
+                            android:textSize="18sp"
+                            android:textColor="#000"
+                            android:fontFamily="@font/montserratt"
+                            app:layout_constraintLeft_toRightOf="@id/img_privacy"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                        <ImageView
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/baseline_arrow_forward_ios_24"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- LOGOUT -->
+            <LinearLayout
+                android:id="@+id/linearLayout_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/tab_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="5dp"
+                        tools:ignore="UnusedAttribute">
+
+                        <ImageView
+                            android:id="@+id/img_icon_logout"
+                            android:layout_width="40sp"
+                            android:layout_height="40sp"
+                            android:padding="7dp"
+                            app:srcCompat="@drawable/icon_logout"
+                            tools:ignore="ContentDescription,ImageContrastCheck"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_log"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="Logout"
+                            android:textSize="18sp"
+                            android:textColor="#000"
+                            android:fontFamily="@font/montserratt"
+                            app:layout_constraintLeft_toRightOf="@id/img_icon_logout"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
