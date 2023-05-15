@@ -5,7 +5,9 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
@@ -57,7 +59,6 @@ class NetworkFunctions {
             }
 
         })
-
     }
 
     fun loginRequest(
@@ -86,6 +87,48 @@ class NetworkFunctions {
                     if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
                     response.body()?.string()?.let { setToJson(it, context, func) }
+                }
+            }
+
+        })
+    }
+
+    fun getProducts(
+        context: Context,
+        url: String,
+        func: (Context, JSONArray, View) -> Unit,
+        view: View,
+        password: String,
+        email: String
+    ) {
+        val formBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("email", email)
+            .addFormDataPart("password", password)
+            .build()
+
+        val request = Request.Builder()
+            .url(url)
+            .post(formBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {e.printStackTrace()}
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                    response.body()?.string()?.let {
+                        var objstring = it
+
+                        if (objstring.substring(0, 1) != "[")
+                            objstring = "[$it]"
+
+                        var obj = JSONArray(objstring)
+
+                        func(context, obj, view)
+                    }
                 }
             }
 

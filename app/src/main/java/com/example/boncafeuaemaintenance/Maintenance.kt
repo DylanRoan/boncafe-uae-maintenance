@@ -1,6 +1,7 @@
 package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -14,8 +15,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_maintenance.*
+import org.json.JSONArray
+import org.json.JSONObject
 import org.w3c.dom.Text
 import java.time.format.DateTimeFormatter
 import java.time.LocalDate
@@ -53,6 +57,20 @@ class Maintenance : Fragment() {
         // Inflate layout for this fragment
         val view = inflater.inflate(R.layout.fragment_maintenance, container, false)
 
+        //get preference
+        val prefName = "com.boncafe_maintenance.app"
+        val prefs = view.context.getSharedPreferences(prefName, AppCompatActivity.MODE_PRIVATE)
+
+        val productsString = prefs.getString("$prefName.products", "[]").toString()
+        val contractString = prefs.getString("$prefName.contract", "[]").toString()
+
+        //change to json object / array
+        val products = JSONArray(productsString)
+        val contract = if (JSONArray(contractString).length() > 0) JSONArray(contractString).getJSONObject(0) else JSONObject("{'contract': 'none'}")
+
+        Log.i("BACKEND : PRODUCT PREF", products.toString()) // DEBUG TODO REMOVE
+        Log.i("BACKEND : CONTRACT PREF", contract.toString()) // DEBUG TODO REMOVE
+
         // Update Last Maintenance date
         SetDate().updateLastMaintenanceDate(view)
 
@@ -61,38 +79,17 @@ class Maintenance : Fragment() {
 
         // Display user's owned coffee machines
         val mainLayout = view.findViewById<LinearLayout>(R.id.main_layout)
-        createOwnedCoffeeMachines(mainLayout)
+        createOwnedCoffeeMachines(mainLayout, products)
 
         return view
     }
 
+
     // Create user's owned coffee machines
     @SuppressLint("MissingInflatedId", "InflateParams")
-    private fun createOwnedCoffeeMachines(mainLayout: LinearLayout){
-        // JSON Placeholder
-        val coffeeMachineDetails = mapOf(
-            "Coffee Machine 1" to mapOf(
-                "Model No" to "834923",
-                "Serial No" to "EZDDBXSO",
-                "Purchased date" to "2022-01-01",
-                "Image" to "https://i.imgur.com/7NNXknZ.png"
-            ),
-            "Coffee Machine 2" to mapOf(
-                "Model No" to "654234",
-                "Serial No" to "KWNDJFNE",
-                "Purchased date" to "2022-05-03",
-                "Image" to "https://i.imgur.com/78RQ5MU.png"
-            ),
-            "Coffee Machine 3" to mapOf(
-                "Model No" to "133742",
-                "Serial No" to "QWERTYU",
-                "Purchased date" to "2022-09-06",
-                "Image" to "https://i.imgur.com/o8k9oRs.png"
-            ),
-        )
-
+    private fun createOwnedCoffeeMachines(mainLayout: LinearLayout, products : JSONArray){
         // Update info
-        for (i in coffeeMachineDetails){
+        for (i in 0 until products.length()) {
             val layoutCoffeeMachine = layoutInflater.inflate(R.layout.container_coffee_machine, null, false)
             val txtCoffeeMachineName = layoutCoffeeMachine.findViewById<TextView>(R.id.txt_coffeeMachineName)
             val imgCoffeeMachine = layoutCoffeeMachine.findViewById<ImageView>(R.id.img_coffeeMachine)
@@ -100,11 +97,13 @@ class Maintenance : Fragment() {
             val txtSerial = layoutCoffeeMachine.findViewById<TextView>(R.id.txt_serialNo)
             val txtPurchased = layoutCoffeeMachine.findViewById<TextView>(R.id.txt_purchasedDate)
 
-            txtCoffeeMachineName.text = i.key
-            Picasso.get().load(i.value["Image"]).into(imgCoffeeMachine)
-            txtModelNo.text = i.value["Model No"]
-            txtSerial.text = i.value["Serial No"]
-            txtPurchased.text = SetDate().formatDateConvert(i.value["Purchased date"])
+            val product = products.getJSONObject(i)
+
+            txtCoffeeMachineName.text = product.getString("machine")
+            Picasso.get().load("https://i.imgur.com/o8k9oRs.png").into(imgCoffeeMachine) // TODO CHANGE IMAGES LATER
+            txtModelNo.text = product.getString("model")
+            txtSerial.text = product.getString("serial")
+            txtPurchased.text = SetDate().formatDateConvert(product.getString("maintenance_due")) // TODO CHANGE DATE / DELETE LATER
 
             mainLayout.addView(layoutCoffeeMachine)
         }
