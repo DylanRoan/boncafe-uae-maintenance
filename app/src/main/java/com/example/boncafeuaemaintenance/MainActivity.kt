@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
             //Log.i("Connectivity", NetworkFunctions().isOnline(this).toString())
             startActivity(Intent(this, SplashScreen::class.java))
             if (hasNetwork){}
-
-
         }
 
         // Go to home page

@@ -48,14 +48,20 @@ class Maintenance : Fragment() {
         }
     }
 
+    var hasContract = true
+
     // Do main coding here
-    @SuppressLint("NewApi", "SetTextI18n")
+    @SuppressLint("NewApi", "SetTextI18n", "MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate layout for this fragment
         val view = inflater.inflate(R.layout.fragment_maintenance, container, false)
+
+        // View references
+        val contractPeriodLayout = view.findViewById<LinearLayout>(R.id.AMC_period_container)
+        val lastMaintenanceLayout = view.findViewById<LinearLayout>(R.id.lastMaintenance_container)
 
         //get preference
         val prefName = "com.boncafe_maintenance.app"
@@ -71,11 +77,16 @@ class Maintenance : Fragment() {
         Log.i("BACKEND : PRODUCT PREF", products.toString()) // DEBUG TODO REMOVE
         Log.i("BACKEND : CONTRACT PREF", contract.toString()) // DEBUG TODO REMOVE
 
-        // Update Last Maintenance date
-        SetDate().updateLastMaintenanceDate(view)
-
-        // Update Contract date ending
-        SetDate().updateContractDaysLeft(view)
+        // Check if user has contract
+        if (!contract.has("contract")){
+            SetDate().updateLastMaintenanceDate(view, contract.getString("maintenance"))
+            SetDate().updateContractDaysLeft(view, contract.getString("start_date"),contract.getString("end_date"))
+            contractPeriodLayout.visibility = View.VISIBLE
+            lastMaintenanceLayout.visibility = View.VISIBLE
+        } else {
+            contractPeriodLayout.visibility = View.GONE
+            lastMaintenanceLayout.visibility = View.GONE
+        }
 
         // Display user's owned coffee machines
         val mainLayout = view.findViewById<LinearLayout>(R.id.main_layout)

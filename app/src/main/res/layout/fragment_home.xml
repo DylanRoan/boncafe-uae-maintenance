@@ -42,6 +42,7 @@
                     app:cardElevation="5dp">
 
                     <ImageView
+                        android:id="@+id/promo_1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/img_promote2"
@@ -58,6 +59,7 @@
                     app:cardElevation="5dp">
 
                     <ImageView
+                        android:id="@+id/promo_2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/img_promote1"
@@ -74,6 +76,7 @@
                     app:cardElevation="5dp">
 
                     <ImageView
+                        android:id="@+id/promo_3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/img_promote3"
@@ -205,15 +208,15 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_below="@id/img_norecent"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginHorizontal="20dp"
                     android:fontFamily="@font/montserratt"
                     android:text="No Recent Notifications"
+                    android:textAlignment="center"
                     android:textColor="#CDCDCD"
                     android:textSize="14sp"
-                    android:textAlignment="center"
-                    tools:ignore="HardcodedText,UnusedAttribute" />
+                    tools:ignore="HardcodedText,UnusedAttribute,TextContrastCheck" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

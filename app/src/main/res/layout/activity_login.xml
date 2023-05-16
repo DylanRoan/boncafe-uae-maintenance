@@ -104,6 +104,18 @@
                     android:singleLine="true"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/txt_warning_incorrect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/montserratt"
+                android:text="* Incorrect e-mail and password"
+                android:textColor="#ff0000"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
             <CheckBox
                 android:id="@+id/check_remember_me"
                 android:layout_width="match_parent"

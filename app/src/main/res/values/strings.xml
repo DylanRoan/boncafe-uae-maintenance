@@ -5,6 +5,7 @@
 
     <!-- CUSTOM STRINGS -->
     <string name="resend"><u>Resend</u></string>
+    <string name="resend2"><u>Click here to send again</u></string>
 
     <!-- DRAWER MENU THINGS -->
     <string name="open_nav">Open Navigation Drawer</string>

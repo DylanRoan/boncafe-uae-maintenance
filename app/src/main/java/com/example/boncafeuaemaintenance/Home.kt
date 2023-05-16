@@ -1,6 +1,7 @@
 package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -12,7 +13,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.ViewFlipper
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +41,17 @@ class Home : Fragment() {
         }
     }
 
+    // Initialisation
+    private var contractDaysLeft: Int = 0
+
+    // Notification layout references
+    private lateinit var linearLayoutRecent: LinearLayout
+    private lateinit var customLayoutNotification: ViewGroup
+    private lateinit var linearLayoutRecentContainer: LinearLayout
+    private lateinit var imgNotif: ImageView
+    private lateinit var txtNotifDescription: TextView
+    private lateinit var txtNotifTitle: TextView
+
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,42 +61,48 @@ class Home : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         
         // References
-        val linearLayoutRecent = view.findViewById<LinearLayout>(R.id.linearLayout_recent)
+        linearLayoutRecent = view.findViewById(R.id.linearLayout_recent)
         val noRecentNotificationLayout = view.findViewById<RelativeLayout>(R.id.layout_noRecent)
+        val viewFlipperPromotions = view.findViewById<ViewFlipper>(R.id.viewFlipper_promotions)
 
         // Check for contract expiration notification
-        displayContractExpiration(view, linearLayoutRecent)
+        displayContractExpiration(view)
 
         // Check empty notifications
         checkEmptyNotifcations(linearLayoutRecent,noRecentNotificationLayout)
 
+        // Clickable promotions
+        viewFlipperPromotions.setOnClickListener {
+            CustomFunctions().openURL(view.context,"https://www.boncafeme.ae/shop?category=machine-deals&&%20category_name=Machine%20Deals")
+        }
+
         return view
     }
 
-    private fun displayContractExpiration(view: View, linearLayoutRecent: LinearLayout){
+    private fun displayContractExpiration(view: View){
         // References (For Notification Layout)
-        val customLayoutNotification = layoutInflater.inflate(R.layout.layout_notification, null, false)
-        val txtNotifDescription = customLayoutNotification.findViewById<TextView>(R.id.txt_notif_description)
-        val txtNotifTitle = customLayoutNotification.findViewById<TextView>(R.id.txt_notif_title)
-        val imgNotif = customLayoutNotification.findViewById<ImageView>(R.id.img_notif)
-        val linearLayoutNotificationContainer = customLayoutNotification.findViewById<LinearLayout>(R.id.linearLayout_notificationContainer)
+        customLayoutNotification = layoutInflater.inflate(R.layout.layout_notification, null, false) as ViewGroup
+        txtNotifDescription = customLayoutNotification.findViewById(R.id.txt_notif_description)
+        txtNotifTitle = customLayoutNotification.findViewById(R.id.txt_notif_title)
+        imgNotif = customLayoutNotification.findViewById(R.id.img_notif)
+        linearLayoutRecentContainer = customLayoutNotification.findViewById(R.id.linearLayout_notificationContainer)
 
         // Get days left of contract expiration
-        val contractDaysLeft = SetDate().getDaysLeft(SetDate().contractEndDate)
+        contractDaysLeft = SetDate().getDaysLeft(SetDate().contractEndDate)
         val yellowColorHex = "#F29D38"
         val redColorHex = "#FF0000"
 
         // Update and display Contract Expiration Notification (always display it at top)
-        if (contractDaysLeft == 0) updateContractExpirationNotification(view,true,customLayoutNotification,imgNotif,linearLayoutRecent,contractDaysLeft,txtNotifDescription,txtNotifTitle,linearLayoutNotificationContainer,redColorHex)
-        else if (contractDaysLeft <= 7) updateContractExpirationNotification(view,false,customLayoutNotification,imgNotif,linearLayoutRecent,contractDaysLeft,txtNotifDescription,txtNotifTitle,linearLayoutNotificationContainer,redColorHex)
-        else if (contractDaysLeft <= 31) updateContractExpirationNotification(view,false,customLayoutNotification,imgNotif,linearLayoutRecent,contractDaysLeft,txtNotifDescription,txtNotifTitle,linearLayoutNotificationContainer,yellowColorHex)
+        if (contractDaysLeft == 0) updateContractExpirationNotification(view,true,redColorHex)
+        else if (contractDaysLeft <= 7) updateContractExpirationNotification(view,false,redColorHex)
+        else if (contractDaysLeft <= 31) updateContractExpirationNotification(view,false,yellowColorHex)
 
         // Remove Contract Expiration Notification
         if (contractDaysLeft < 0 || contractDaysLeft > 31) linearLayoutRecent.removeView(customLayoutNotification)
     }
 
     @SuppressLint("SetTextI18n")
-    private fun updateContractExpirationNotification(view: View, expired: Boolean, customLayoutNotification: View,imgNotif: ImageView, linearLayoutRecent: LinearLayout, contractDaysLeft: Int, txtNotifDescription: TextView, txtNotifTitle: TextView, linearLayoutNotificationContainer: LinearLayout, colorHex: String){
+    private fun updateContractExpirationNotification(view: View, expired: Boolean, colorHex: String){
         if (!expired){
             // Highlight 'X days left'
             val txtContractDesc="Your contract ends in $contractDaysLeft days. Awaiting for your renewal."
@@ -90,8 +111,8 @@ class Home : Fragment() {
                 emptyArray(),txtContractDescSpan,arrayOf(colorHex))
         } else {
             // Contract expired
-            val txtContractDesc="Your contract has expired. Please contact our Technical Support if you wish to renew one."
-            val txtContractDescSpan=arrayOf("Technical Support")
+            val txtContractDesc="Your contract has expired. Please contact us if you wish to renew one."
+            val txtContractDescSpan=arrayOf("contact us")
             txtNotifDescription.text = CustomFunctions().spanTextCustom(txtContractDesc,false,view.context,
                 emptyArray(),txtContractDescSpan,arrayOf("#FF8300"))
 
@@ -103,7 +124,7 @@ class Home : Fragment() {
         txtNotifTitle.setTextColor(Color.parseColor(colorHex))
 
         // Change notification's border color
-        val drawable = linearLayoutNotificationContainer.background as GradientDrawable
+        val drawable = linearLayoutRecentContainer.background as GradientDrawable
         drawable.setStroke(7,Color.parseColor(colorHex))
 
         // Set image
@@ -113,8 +134,14 @@ class Home : Fragment() {
         linearLayoutRecent.addView(customLayoutNotification, 0)
 
         // Handle clicks
-        customLayoutNotification.setOnClickListener{
-            // code
+        if (!expired){
+            customLayoutNotification.setOnClickListener{
+                // code
+            }
+        } else {
+            customLayoutNotification.setOnClickListener{
+                //CustomFunctions().openURL(view, )
+            }
         }
     }
 

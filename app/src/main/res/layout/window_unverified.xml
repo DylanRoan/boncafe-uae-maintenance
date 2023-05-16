@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
@@ -36,7 +35,7 @@
                 android:layout_height="170dp"
                 android:layout_gravity="center"
                 android:layout_marginVertical="10dp"
-                android:src="@drawable/gif_email_verify" />
+                android:src="@drawable/gif_wrong" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,10 +43,10 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/montserratt"
                 android:padding="10dp"
-                android:text="VERIFICATION"
+                android:text="UNVERIFIED ACCOUNT"
                 android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="25sp"
+                android:textColor="#ff0000"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 
@@ -57,10 +56,10 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/montserratt"
                 android:paddingHorizontal="20sp"
-                android:text="A verification link has been sent to your email.\n\nNot yet received?"
+                android:text="Your account is currently unverified."
                 android:textAlignment="center"
                 android:textColor="#000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -71,15 +70,27 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/montserratt"
                 android:paddingHorizontal="20sp"
-                android:text="@string/resend"
+                android:text="@string/resend2"
                 android:textAlignment="center"
                 android:textColor="#FF8300"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserratt"
+                android:paddingHorizontal="20sp"
+                android:text="Didn't receive the email? Check spam. Otherwise, contact as at info.bme@boncafeme.ae"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

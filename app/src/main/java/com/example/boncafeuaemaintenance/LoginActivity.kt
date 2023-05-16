@@ -45,9 +45,6 @@ class LoginActivity : AppCompatActivity() {
 
         // Click 'Login' Button
         btn_login.setOnClickListener {
-            // Open pop-up window
-            //popUpWindow()
-
             if (hasNetwork)
             {
                 // Login
@@ -55,6 +52,9 @@ class LoginActivity : AppCompatActivity() {
                 email = input_email.text.toString()
                 NetworkFunctions().loginRequest(this, "https://boncafe-backend.herokuapp.com/login", ::getInfo, password, email)
 
+            } else {
+                // Open pop-up window
+                popUpWindow()
             }
         }
 
@@ -127,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("InflateParams")
     private fun popUpWindow(){
         // Referencing
-        val popupBinding=layoutInflater.inflate(R.layout.window_verification,null)
+        val popupBinding=layoutInflater.inflate(R.layout.window_unverified,null)
         val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
 
         //Make pop-window as Dialog

@@ -10,17 +10,18 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class SetDate{
-    // Set last maintenance date
+    /*// Set last maintenance date
     val lastMaintenanceDate = "2023-03-11T16:26:05.000Z"
 
     // Set Contract Start date and End date
     val contractStartDate = "2023-01-01T16:26:05.000Z"
+    val contractEndDate = "2023-12-31T16:26:05.000Z"*/
     val contractEndDate = "2023-12-31T16:26:05.000Z"
 
     // Update last maintenance date
     @SuppressLint("SetTextI18n")
-    fun updateLastMaintenanceDate(view: View){
-        val daysAgo = getDaysAgo(lastMaintenanceDate)
+    fun updateLastMaintenanceDate(view: View, passLastMaintenanceDate: String){
+        val daysAgo = getDaysAgo(passLastMaintenanceDate)
 
         // Date Conversion
         val monthsAgo = daysAgo / 30
@@ -41,28 +42,28 @@ class SetDate{
 
     // Update contract date ending
     @SuppressLint("SetTextI18n")
-    fun updateContractDaysLeft(view: View){
-        val daysLeft = getDaysLeft(contractEndDate)
+    fun updateContractDaysLeft(view: View, passStartContactDate: String, passEndContactDate: String ){
+        val daysLeft = getDaysLeft(passEndContactDate)
 
         // Update Contract's Start Date, End Date and Days left
         val txtContractDaysLeft = view.findViewById<TextView>(R.id.txt_contract_daysLeft)
         val txtContractStartDate = view.findViewById<TextView>(R.id.txt_start_date)
         val txtContractEndDate = view.findViewById<TextView>(R.id.txt_end_date)
         txtContractDaysLeft.text = "($daysLeft Days Left)"
-        txtContractStartDate.text = contractStartDate.substring(0,10) //THIS VIEW IS GONE
-        txtContractEndDate.text = contractEndDate.substring(0,10) // THIS VIEW IS GONE
+        txtContractStartDate.text = passStartContactDate.substring(0,10) //THIS VIEW IS GONE
+        txtContractEndDate.text = passEndContactDate.substring(0,10) // THIS VIEW IS GONE
 
         // Update Contract's Start Date
-        val (startDay,startMonth,startYear) = passSeperateDate(contractStartDate)
+        val (startDay,startMonth,startYear) = passSeperateDate(passStartContactDate)
         val txtStartDay = view.findViewById<TextView>(R.id.txt_start_day)
-        txtStartDay.text = "$startDay"
+        txtStartDay.text = startDay
         val txtStartMonthYear = view.findViewById<TextView>(R.id.txt_start_month_year)
         txtStartMonthYear.text = "$startMonth, $startYear"
 
         // Update Contract's ENd Date
-        val (endDay,endMonth,endYear) = passSeperateDate(contractEndDate)
+        val (endDay,endMonth,endYear) = passSeperateDate(passEndContactDate)
         val txtEndDay = view.findViewById<TextView>(R.id.txt_end_day)
-        txtEndDay.text = "$endDay"
+        txtEndDay.text = endDay
         val txtEndMonthYear = view.findViewById<TextView>(R.id.txt_end_month_year)
         txtEndMonthYear.text = "$endMonth, $endYear"
 
@@ -83,7 +84,7 @@ class SetDate{
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val pastDate = LocalDate.parse(dateSplit, formatter)
         val currentDate = LocalDate.now()
-        val daysAgo = currentDate.toEpochDay() - pastDate.toEpochDay()
+        val daysAgo = pastDate.toEpochDay() - currentDate.toEpochDay()
 
         return daysAgo.toInt()
     }

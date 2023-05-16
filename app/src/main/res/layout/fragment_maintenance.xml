@@ -23,7 +23,6 @@
 
             <!-- CONTRACT PERIOD CONTAINER -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/AMC_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -32,6 +31,7 @@
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp">
                 <LinearLayout
+                    android:id="@+id/AMC_period_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -246,7 +246,6 @@
 
             <!-- LAST MAINTENANCE DATE CONTAINER -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/lastMaintenance_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -255,6 +254,7 @@
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp">
                 <LinearLayout
+                    android:id="@+id/lastMaintenance_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
