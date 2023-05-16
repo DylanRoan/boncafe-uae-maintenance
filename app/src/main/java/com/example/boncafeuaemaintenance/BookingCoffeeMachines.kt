@@ -121,13 +121,14 @@ class BookingCoffeeMachines : Fragment() {
 
                 // Store inputted Serial Number text to ViewModel
                 inputSerial.setOnFocusChangeListener { v, hasFocus ->
+
                     // Check if user finishes using EditText and check if its not empty or doesn't include any whitespaces
                     if (!hasFocus && inputSerial.text.trim().toString().isNotEmpty()) {
                         // Get EditText's text
                         val enteredText = inputSerial.text.toString()
 
                         // Pass the inputted text to ViewModel
-                        sharedViewModel.addSerialID(enteredText)
+                        sharedViewModel.setSerialID(inputSerial.hint.toString(), enteredText)
                     }
                 }
             }
@@ -144,6 +145,10 @@ class BookingCoffeeMachines : Fragment() {
 
                 // Find last EditText's Serial Number and remove it from parent layout
                 val lastInputSerialView = view.findViewById<EditText>(lastInputSerialID)
+
+                val lastCountViewHint = lastInputSerialView.hint.toString()
+                sharedViewModel.removeSerialID(lastCountViewHint)
+
                 linearLayoutCoffeeMachines.removeView(lastInputSerialView)
 
                 // Remove last EditText's Serial Number ID

@@ -4,32 +4,40 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import org.json.JSONObject
 
 class SharedViewModel : ViewModel() {
 
     //------ STORE SERIAL IDS ------//
-    val serialIDs: MutableList<String> = mutableListOf()
-    val concatenatedSerialIDs: MutableLiveData<String> = MutableLiveData()
+    var serialIDs = JSONObject()
+    var concatenatedSerialIDs: MutableLiveData<String> = MutableLiveData()
 
     // Store serial IDs
-    fun addSerialID(inputSerialText: String) {
-        serialIDs.add(inputSerialText)
+    fun setSerialID(name : String, inputSerialText: String) {
+        serialIDs.put(name, inputSerialText)
         updateConcatenatedSerialIDs()
+
+        Log.i("BACKEND", serialIDs.toString())
     }
 
-    // For checking if user makes any changes to the EditText
-    fun updateSerialID(index: Int, inputSerialText: String) {
-        serialIDs[index] = inputSerialText
+    fun removeSerialID(name : String){
+        serialIDs.remove(name)
         updateConcatenatedSerialIDs()
-    }
-
-    fun removeSerialID(index:Int){
-        serialIDs.removeAt(index)
     }
 
     // Get all serial IDs and then put them into one string
     private fun updateConcatenatedSerialIDs() {
-        val concatenatedText = serialIDs.joinToString("\n")
+
+        var out = ""
+        for (i in serialIDs.keys())
+        {
+            out += "${serialIDs.get(i)}\n"
+        }
+        //remove the last \n at the end
+        out = out.removeRange(out.length - 2, out.length - 1)
+        Log.i("BACKEND", "Concatenated : $out")
+
+        val concatenatedText = out
         concatenatedSerialIDs.value = concatenatedText
     }
     //------------------------------//
