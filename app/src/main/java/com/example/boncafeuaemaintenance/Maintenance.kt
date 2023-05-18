@@ -79,7 +79,7 @@ class Maintenance : Fragment() {
 
         // Check if user has contract
         if (!contract.has("contract")){
-            // Uodate maintenance due date
+            // Update maintenance due date
             SetDate().updateLastMaintenanceDate(view, contract.getString("maintenance"))
 
             // Update contract ending date

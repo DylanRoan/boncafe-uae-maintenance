@@ -33,8 +33,7 @@ class SharedViewModel : ViewModel() {
         {
             out += "${serialIDs.get(i)}\n"
         }
-        //remove the last \n at the end
-        out = out.removeRange(out.length - 2, out.length - 1)
+
         Log.i("BACKEND", "Concatenated : $out")
 
         val concatenatedText = out

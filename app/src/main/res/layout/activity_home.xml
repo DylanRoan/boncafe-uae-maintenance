@@ -58,6 +58,7 @@
             <!--  FRAGMENT (PAGES CONTAINER)  -->
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
+                android:visibility="visible"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -67,6 +68,46 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
                 app:navGraph="@navigation/my_nav" />
+
+            <!--NO WIFI LAYOUT-->
+            <LinearLayout
+                android:id="@+id/layout_no_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/img_no_wifi"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserratt"
+                    android:text="No WiFi Connection"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    tools:ignore="HardcodedText,UnusedAttribute" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserratt"
+                    android:layout_marginHorizontal="50dp"
+                    android:text="Please check your internet settings and try again."
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    tools:ignore="HardcodedText,UnusedAttribute" />
+            </LinearLayout>
 
             <!--  TOOLBAR (TOP NAV MENU)  -->
             <com.google.android.material.appbar.AppBarLayout
@@ -156,7 +197,7 @@
                     android:padding="3dp"
                     app:srcCompat="@drawable/icon_facebook"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    tools:ignore="ContentDescription,ImageContrastCheck" />
+                    tools:ignore="ContentDescription,ImageContrastCheck,UnusedAttribute" />
                 <ImageView
                     android:id="@+id/icon_instagram"
                     android:layout_width="60dp"
@@ -165,7 +206,8 @@
                     android:padding="3dp"
                     app:srcCompat="@drawable/icon_instagram"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    tools:ignore="ContentDescription,ImageContrastCheck" />
+                    tools:ignore="ContentDescription,ImageContrastCheck,UnusedAttribute"
+                    tools:targetApi="m" />
                 <ImageView
                     android:id="@+id/icon_youtube"
                     android:layout_width="60dp"
@@ -174,7 +216,7 @@
                     android:padding="3dp"
                     app:srcCompat="@drawable/icon_youtube"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    tools:ignore="ContentDescription,ImageContrastCheck" />
+                    tools:ignore="ContentDescription,ImageContrastCheck,UnusedAttribute" />
             </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

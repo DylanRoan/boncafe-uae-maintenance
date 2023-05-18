@@ -57,30 +57,13 @@ class BookingCoffeeMachines : Fragment() {
         val btnAddSerial = view.findViewById<ImageView>(R.id.btn_add_serial)
         val btnRemoveSerial = view.findViewById<ImageView>(R.id.btn_remove_serial)
 
-        // Store first edit text to ViewModel
-        val editTextSerial = view.findViewById<EditText>(R.id.input_serial)
-        editTextSerial.addTextChangedListener(object:TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // NA
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Save the updated text to the SharedViewModel
-                sharedViewModel.setData(s.toString())
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                // NA
-            }
-        })
-
         // Initialisations
-        var serialInputTextCounter = 1
+        var serialInputTextCounter = 0
         val maxSerialInputs = 5
 
         // For setting button visibility
         fun checkButtonVisibility(){
-            if (serialInputTextCounter<=1) {
+            if (serialInputTextCounter<=0) {
                 btnAddSerial.visibility = View.VISIBLE
                 btnRemoveSerial.visibility = View.INVISIBLE
             } else if (serialInputTextCounter>=maxSerialInputs){
@@ -136,7 +119,7 @@ class BookingCoffeeMachines : Fragment() {
 
         // Button for removing last EditText of Serial Number
         btnRemoveSerial.setOnClickListener {
-            if (serialInputTextCounter > 1){
+            if (serialInputTextCounter > 0){
                 serialInputTextCounter--
                 checkButtonVisibility()
 
@@ -146,9 +129,13 @@ class BookingCoffeeMachines : Fragment() {
                 // Find last EditText's Serial Number and remove it from parent layout
                 val lastInputSerialView = view.findViewById<EditText>(lastInputSerialID)
 
-                val lastCountViewHint = lastInputSerialView.hint.toString()
-                sharedViewModel.removeSerialID(lastCountViewHint)
+                // Remove serial ID from ViewModel
+                if (lastInputSerialView.text.trim().toString().isNotEmpty()){
+                    val lastCountViewHint = lastInputSerialView.hint.toString()
+                    sharedViewModel.removeSerialID(lastCountViewHint)
+                }
 
+                // Remove EditText
                 linearLayoutCoffeeMachines.removeView(lastInputSerialView)
 
                 // Remove last EditText's Serial Number ID

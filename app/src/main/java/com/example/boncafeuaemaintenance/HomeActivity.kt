@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -34,8 +35,18 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             hasNetwork = isNetwork
 
             val params = connection_error.layoutParams
-            if (hasNetwork) params.height = 0
-            else params.height = 80
+            if (hasNetwork){
+                params.height = 0
+
+                fragmentContainerView.visibility = View.VISIBLE
+                layout_no_wifi.visibility = View.GONE
+            }
+            else {
+                params.height = 80
+
+                fragmentContainerView.visibility = View.GONE
+                layout_no_wifi.visibility = View.VISIBLE
+            }
 
             connection_error.layoutParams = params
         }
