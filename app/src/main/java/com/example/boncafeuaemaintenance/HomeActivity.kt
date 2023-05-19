@@ -1,6 +1,7 @@
 package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -100,7 +101,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.spareParts -> CustomFunctions().openURL(this, "https://www.boncafeme.ae/shop?category=spare-parts&&%20category_name=Spare%20Parts")
             R.id.browseProducts -> CustomFunctions().openURL(this, "https://www.boncafeme.ae/categories")
             R.id.logout -> {
-                // Logout
+                val prefName = "com.boncafe_maintenance.app"
+                val prefs = getSharedPreferences(prefName, MODE_PRIVATE)
+                prefs.edit().putString("$prefName.email", "none").apply() //insecure
+                prefs.edit().putString("$prefName.password", "none").apply() //insecure
+                prefs.edit().putBoolean("$prefName.remember_me", false).apply() //insecure
+                startActivity(Intent(this, LoginActivity::class.java))
             }
         }
         return true

@@ -1,6 +1,7 @@
 package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,6 +51,7 @@ class Settings : Fragment() {
         val tabWarehouseLocation = view.findViewById<ConstraintLayout>(R.id.tab_warehouse_location)
         val tabTerms = view.findViewById<ConstraintLayout>(R.id.tab_termsconditions)
         val tabPrivacyPolicy = view.findViewById<ConstraintLayout>(R.id.tab_privacy)
+        val tabLogout = view.findViewById<ConstraintLayout>(R.id.tab_logout)
 
         // URLs
         val urlOfficeLocation = "https://goo.gl/maps/pciQUq5mKUrhrABd8"
@@ -72,6 +75,16 @@ class Settings : Fragment() {
             targetConstLayout.setOnClickListener{
                 CustomFunctions().openURL(view.context, targetURL)
             }
+        }
+
+        // Logout button
+        tabLogout.setOnClickListener {
+            val prefName = "com.boncafe_maintenance.app"
+            val prefs = view.context.getSharedPreferences(prefName, AppCompatActivity.MODE_PRIVATE)
+            prefs.edit().putString("$prefName.email", "none").apply() //insecure
+            prefs.edit().putString("$prefName.password", "none").apply() //insecure
+            prefs.edit().putBoolean("$prefName.remember_me", false).apply() //insecure
+            startActivity(Intent(view.context, LoginActivity::class.java))
         }
 
 
