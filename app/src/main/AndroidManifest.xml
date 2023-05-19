@@ -20,8 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".BookingCreate"
-            android:exported="false"
-            android:windowSoftInputMode="adjustNothing" />
+            android:exported="false" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />

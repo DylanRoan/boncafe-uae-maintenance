@@ -151,7 +151,7 @@
                                 tools:ignore="HardcodedText,UnusedAttribute" />
 
                             <Button
-                                android:id="@+id/btn_renewContract"
+                                android:id="@+id/btn_book_now"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="30dp"

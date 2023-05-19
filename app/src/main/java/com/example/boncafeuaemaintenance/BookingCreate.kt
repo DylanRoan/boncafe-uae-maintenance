@@ -3,7 +3,12 @@ package com.example.boncafeuaemaintenance
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.ClipDrawable
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +27,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_booking_create.*
 import kotlinx.android.synthetic.main.layout_booking_coffeemachines.view.*
+import pl.droidsonroids.gif.GifDrawable
+import pl.droidsonroids.gif.GifDrawableInit
+import pl.droidsonroids.gif.GifImageView
 
 class BookingCreate : AppCompatActivity(), LifecycleOwner {
 
@@ -133,5 +141,46 @@ class BookingCreate : AppCompatActivity(), LifecycleOwner {
         widthAnimator.setIntValues(startPoint, endPoint)
         widthAnimator.duration = duration
         widthAnimator.start()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        popUpWindow(this)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun popUpWindow(context: Context){
+        // Referencing
+        val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
+        val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
+        val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
+        val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
+        val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
+        val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
+        val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
+
+        // Set Header and description
+        popupHeader.text = "UNSAVED CHANGES"
+        popupText.text = "Are you sure you want to go back?"
+
+        popupGif.visibility = View.GONE
+        backButton.visibility = View.GONE
+
+        //Make pop-window as Dialog
+        val myPopup= Dialog(context)
+        myPopup.setContentView(popupBinding)
+
+        //Display pop-up window
+        myPopup.setCancelable(true)
+        myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myPopup.show()
+
+        btnYes.setOnClickListener {
+            super.onBackPressed()
+        }
+
+        btnNo.setOnClickListener {
+            myPopup.dismiss()
+        }
     }
 }

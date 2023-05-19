@@ -2,6 +2,7 @@ package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -16,6 +18,7 @@ import android.widget.TextView
 import android.widget.ViewFlipper
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.json.JSONObject
 import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
@@ -64,6 +67,7 @@ class Home : Fragment() {
         linearLayoutRecent = view.findViewById(R.id.linearLayout_recent)
         val noRecentNotificationLayout = view.findViewById<RelativeLayout>(R.id.layout_noRecent)
         val viewFlipperPromotions = view.findViewById<ViewFlipper>(R.id.viewFlipper_promotions)
+        val btnBookNow = view.findViewById<Button>(R.id.btn_book_now)
 
         // Check for contract expiration notification
         displayContractExpiration(view)
@@ -74,6 +78,11 @@ class Home : Fragment() {
         // Clickable promotions
         viewFlipperPromotions.setOnClickListener {
             CustomFunctions().openURL(view.context,"https://www.boncafeme.ae/shop?category=machine-deals&&%20category_name=Machine%20Deals")
+        }
+
+        // Book Now Button
+        btnBookNow.setOnClickListener {
+            view.context.startActivity(Intent(view.context, BookingCreate::class.java))
         }
 
         return view
@@ -88,7 +97,7 @@ class Home : Fragment() {
         linearLayoutRecentContainer = customLayoutNotification.findViewById(R.id.linearLayout_notificationContainer)
 
         // Get days left of contract expiration
-        contractDaysLeft = SetDate().getDaysLeft(SetDate().contractEndDate)
+        contractDaysLeft = SetDate().getDaysLeft(SetDate().contractEndDate) // TODO Contract ENd Date Here, replace "SetDate().contractEndDate"
         val yellowColorHex = "#F29D38"
         val redColorHex = "#FF0000"
 

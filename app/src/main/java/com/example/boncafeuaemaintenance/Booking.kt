@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_booking.*
 
 // TODO: Rename parameter arguments, choose names that match

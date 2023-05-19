@@ -1,8 +1,11 @@
 package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,11 +14,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import kotlinx.android.synthetic.main.fragment_booking_summary.*
 import org.json.JSONArray
+import pl.droidsonroids.gif.GifImageView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,6 +89,8 @@ class BookingSummary : Fragment() {
         }
 
         btnConfirm.setOnClickListener {
+            popUpWindow(view.context)
+
             val prefName = "com.boncafe_maintenance.app"
             val prefs = view.context.getSharedPreferences(prefName, AppCompatActivity.MODE_PRIVATE)
 
@@ -120,9 +128,84 @@ class BookingSummary : Fragment() {
         else {
             context.startActivity(Intent(context, LoginActivity::class.java))
         }
+    }
 
+    @SuppressLint("SetTextI18n")
+    private fun popUpWindow(context: Context){
+        // Referencing
+        val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
+        val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
+        val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
+        val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
+        val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
+        val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
+        val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
 
+        // Set Header and description
+        popupHeader.text = "CONFIRMATION"
+        popupText.text = "Are you sure you want to confirm?"
 
+        popupGif.visibility = View.GONE
+        backButton.visibility = View.GONE
+
+        //Make pop-window as Dialog
+        val myPopup= Dialog(context)
+        myPopup.setContentView(popupBinding)
+
+        //Display pop-up window
+        myPopup.setCancelable(true)
+        myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myPopup.show()
+
+        btnYes.setOnClickListener {
+            myPopup.dismiss()
+
+            // TODO Code here for sending to email
+
+            popUpWindowConfirmed(context)
+        }
+
+        btnNo.setOnClickListener {
+            myPopup.dismiss()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun popUpWindowConfirmed(context: Context){
+        // Referencing
+        val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
+        val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
+        val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
+        val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
+        val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
+        val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
+        val btnLayout = popupBinding.findViewById<LinearLayout>(R.id.layout_window_buttons)
+        val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
+
+        // Set Header and description
+        popupHeader.text = "SUCCESS"
+        popupText.text = "Your issue has been sent.\nPlease wait for us to reach out to you to set up an appointment."
+        btnYes.text = "OK"
+
+        btnNo.visibility = View.GONE
+        backButton.visibility = View.GONE
+
+        //Make pop-window as Dialog
+        val myPopup= Dialog(context)
+        myPopup.setContentView(popupBinding)
+
+        //Display pop-up window
+        myPopup.setCancelable(true)
+        myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myPopup.show()
+
+        btnYes.setOnClickListener {
+            context.startActivity(Intent(context, HomeActivity::class.java))
+        }
+
+        myPopup.setOnCancelListener {
+            context.startActivity(Intent(context, HomeActivity::class.java))
+        }
     }
 
     companion object {
