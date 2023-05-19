@@ -83,7 +83,9 @@ class Maintenance : Fragment() {
 
     fun setContract(view : View, context : Context, jsonArray: JSONArray)
     {
-        Log.i("BACKEND : CONTRACT", jsonArray.toString()) // DEBUG TODO
+        Log.i("BACKEND : CONTRACT", jsonArray.toString()) // DEBUG
+
+        if (jsonArray.length() <= 0) return
 
         if (!jsonArray.getJSONObject(0).has("login")) //if login did not fail
         {
@@ -112,12 +114,6 @@ class Maintenance : Fragment() {
                     contractPeriodLayout.visibility = View.VISIBLE
                     lastMaintenanceLayout.visibility = View.VISIBLE
                 }
-            } else {
-                // Set maintenance and contract layout visibility
-                activity?.runOnUiThread {
-                    contractPeriodLayout.visibility = View.GONE
-                    lastMaintenanceLayout.visibility = View.GONE
-                }
             }
         }
         else
@@ -130,7 +126,13 @@ class Maintenance : Fragment() {
 
     fun setProducts(view : View, context : Context, jsonArray: JSONArray)
     {
-        Log.i("BACKEND : PRODUCTS", jsonArray.toString()) // DEBUG TODO
+        Log.i("BACKEND : PRODUCTS", jsonArray.toString()) // DEBUG
+
+        if (jsonArray.length() <= 0) {
+            //TODO YOU DONT OWN ANY PRODUCTS
+
+            return
+        }
 
         if (!jsonArray.getJSONObject(0).has("login")) //if login did not fail
         {

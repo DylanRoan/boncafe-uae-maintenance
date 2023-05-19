@@ -93,6 +93,41 @@ class NetworkFunctions {
         })
     }
 
+    fun signupRequest(
+        context: Context,
+        url: String,
+        func: (Context, JSONArray) -> Unit,
+        password: String,
+        email: String,
+        name: String
+    ) {
+        val formBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("email", email)
+            .addFormDataPart("password", password)
+            .addFormDataPart("full_name", name)
+            .addFormDataPart("authcode", "testauth123")
+            .build()
+
+        val request = Request.Builder()
+            .url(url)
+            .post(formBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {e.printStackTrace()}
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                    response.body()?.string()?.let { setToJson(it, context, func) }
+                }
+            }
+
+        })
+    }
+
     fun maintenancePageRequest(
         view: View,
         context: Context,

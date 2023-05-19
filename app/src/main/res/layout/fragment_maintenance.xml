@@ -28,14 +28,16 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                android:visibility="gone"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp">
+
                 <LinearLayout
                     android:id="@+id/AMC_period_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <!-- HEADER -->
                     <TextView
@@ -50,6 +52,7 @@
                         android:textSize="22sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,UnusedAttribute" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -96,6 +99,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1">
+
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="95dp"
@@ -109,6 +113,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:id="@+id/txt_start_day"
                                     android:layout_width="match_parent"
@@ -122,6 +127,7 @@
                                     android:textSize="35sp"
                                     android:textStyle="bold"
                                     tools:ignore="HardcodedText,UnusedAttribute" />
+
                                 <TextView
                                     android:id="@+id/txt_start_month_year"
                                     android:layout_width="match_parent"
@@ -142,6 +148,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1">
+
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="95dp"
@@ -155,6 +162,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:id="@+id/txt_end_day"
                                     android:layout_width="match_parent"
@@ -168,6 +176,7 @@
                                     android:textSize="35sp"
                                     android:textStyle="bold"
                                     tools:ignore="HardcodedText,UnusedAttribute" />
+
                                 <TextView
                                     android:id="@+id/txt_end_month_year"
                                     android:layout_width="match_parent"
@@ -184,7 +193,6 @@
 
                         <!-- START DATE -->
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/txt_start_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -195,11 +203,11 @@
                             android:textAlignment="center"
                             android:textColor="#000"
                             android:textSize="18sp"
+                            android:visibility="gone"
                             tools:ignore="HardcodedText" />
 
                         <!-- END DATE -->
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/txt_end_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -210,6 +218,7 @@
                             android:textAlignment="center"
                             android:textColor="#000"
                             android:textSize="18sp"
+                            android:visibility="gone"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
 
@@ -233,13 +242,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:padding="9dp"
                         android:backgroundTint="#FF8300"
+                        android:fontFamily="@font/montserratt"
+                        android:letterSpacing="0"
+                        android:padding="9dp"
                         android:text="RENEW CONTRACT?"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/montserratt"
-                        android:letterSpacing="0"
                         tools:ignore="HardcodedText,TextContrastCheck,VisualLintButtonSize" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -251,25 +260,28 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                android:visibility="gone"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp">
+
                 <LinearLayout
                     android:id="@+id/lastMaintenance_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
                     <TextView
                         android:id="@+id/txt_maintenance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/montserratt"
                         android:text="Last Maintenance Since:"
+                        android:textAlignment="center"
+                        android:textColor="#000"
                         android:textSize="22sp"
                         android:textStyle="bold"
-                        android:textColor="#000"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/montserratt"
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -280,10 +292,10 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/montserratt"
                         android:text="1 Days ago"
+                        android:textAlignment="center"
                         android:textColor="#009B06"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textAlignment="center"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

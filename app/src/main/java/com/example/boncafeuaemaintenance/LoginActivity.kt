@@ -112,8 +112,16 @@ class LoginActivity : AppCompatActivity() {
                 prefs.edit().putBoolean("$prefName.remember_me", true).apply() //insecure
             }
 
-            //go home
-            startActivity(Intent(context, HomeActivity::class.java))
+            if (jsonobj.get("confirmed") as Boolean)
+            {
+                //go home
+                startActivity(Intent(context, HomeActivity::class.java))
+            }
+            else
+            {
+                runOnUiThread { popUpWindow(context) }
+                prefs.edit().putBoolean("$prefName.remember_me", false).apply() //insecure
+            }
 
         }
         else {
@@ -131,13 +139,13 @@ class LoginActivity : AppCompatActivity() {
 
     // Pop-Up Window
     @SuppressLint("InflateParams")
-    private fun popUpWindow(){
+    private fun popUpWindow(context: Context){
         // Referencing
-        val popupBinding=layoutInflater.inflate(R.layout.window_unverified,null)
+        val popupBinding=layoutInflater.inflate(R.layout.window_verification,null)
         val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
 
         //Make pop-window as Dialog
-        val myPopup= Dialog(this)
+        val myPopup= Dialog(context)
         myPopup.setContentView(popupBinding)
 
         //Display pop-up window
@@ -148,6 +156,11 @@ class LoginActivity : AppCompatActivity() {
         // Close pop-up window
         backButton.setOnClickListener{
             myPopup.dismiss()
+            context.startActivity(Intent(context, LoginActivity::class.java))
+        }
+
+        myPopup.setOnCancelListener {
+            context.startActivity(Intent(context, LoginActivity::class.java))
         }
     }
 }
