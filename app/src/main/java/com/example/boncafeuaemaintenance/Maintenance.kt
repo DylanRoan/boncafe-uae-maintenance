@@ -17,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_maintenance.*
 import org.json.JSONArray
@@ -89,33 +90,30 @@ class Maintenance : Fragment() {
 
         if (!jsonArray.getJSONObject(0).has("login")) //if login did not fail
         {
+
             // View references
-            val contractPeriodLayout = view.findViewById<LinearLayout>(R.id.AMC_period_container)
+            val contractPeriodLayout = view.findViewById<CardView>(R.id.AMC_period_container)
             val noProductsContractLayout = view.findViewById<LinearLayout>(R.id.layout_no_products_contract)
-            val lastMaintenanceLayout =
-                view.findViewById<LinearLayout>(R.id.lastMaintenance_container)
+            val lastMaintenanceLayout = view.findViewById<CardView>(R.id.lastMaintenance_container)
 
-            val contract =
-                if (jsonArray.length() > 0) jsonArray.getJSONObject(0) else JSONObject("{'contract': 'none'}")
+            val contract = jsonArray.getJSONObject(0)
 
-            // Check if user has contract
-            if (!contract.has("contract")) {
-                activity?.runOnUiThread {
-                    // Update maintenance due date
-                    SetDate().updateMaintenanceDueDate(view, contract.getString("maintenance"))
+            activity?.runOnUiThread {
+                // Update maintenance due date
+                SetDate().updateMaintenanceDueDate(view, contract.getString("maintenance"))
 
-                    // Update contract ending date
-                    SetDate().updateContractDaysLeft(
-                        view,
-                        contract.getString("start_date"),
-                        contract.getString("end_date")
-                    )
+                // Update contract ending date
+                SetDate().updateContractDaysLeft(
+                    view,
+                    contract.getString("start_date"),
+                    contract.getString("end_date")
+                )
 
-                    // Set maintenance and contract layout visibility
-                    contractPeriodLayout.visibility = View.VISIBLE
-                    lastMaintenanceLayout.visibility = View.VISIBLE
-                    noProductsContractLayout.visibility = View.GONE
-                }
+                // Set maintenance and contract layout visibility
+                contractPeriodLayout.visibility = View.VISIBLE
+                lastMaintenanceLayout.visibility = View.VISIBLE
+                noProductsContractLayout.visibility = View.GONE
+
             }
         }
         else
@@ -130,11 +128,9 @@ class Maintenance : Fragment() {
     {
         Log.i("BACKEND : PRODUCTS", jsonArray.toString()) // DEBUG
 
-        if (jsonArray.length() <= 0) {
-            //TODO YOU DONT OWN ANY PRODUCTS
+        val noProductsContractLayout = view.findViewById<LinearLayout>(R.id.layout_no_products_contract)
 
-            return
-        }
+        if (jsonArray.length() <= 0) return
 
         if (!jsonArray.getJSONObject(0).has("login")) //if login did not fail
         {
@@ -142,6 +138,7 @@ class Maintenance : Fragment() {
             activity?.runOnUiThread {
                 val mainLayout = view.findViewById<LinearLayout>(R.id.main_layout)
                 createOwnedCoffeeMachines(mainLayout, jsonArray)
+                noProductsContractLayout.visibility = View.GONE
             }
         }
         else

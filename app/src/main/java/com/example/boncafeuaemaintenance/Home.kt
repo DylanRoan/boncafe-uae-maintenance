@@ -16,8 +16,10 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.ViewFlipper
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.json.JSONArray
 import org.json.JSONObject
 import org.w3c.dom.Text
 
@@ -70,7 +72,17 @@ class Home : Fragment() {
         val btnBookNow = view.findViewById<Button>(R.id.btn_book_now)
 
         // Check for contract expiration notification
-        displayContractExpiration(view)
+        val prefName = "com.boncafe_maintenance.app"
+        val prefs = view.context.getSharedPreferences(prefName, AppCompatActivity.MODE_PRIVATE)
+
+        val email = prefs.getString("$prefName.email", "none") as String
+        val password = prefs.getString("$prefName.password", "none") as String
+
+        //contract network call
+        NetworkFunctions().maintenancePageRequest(view, view.context,
+            "https://boncafe-backend.herokuapp.com/contract",
+            ::displayContractExpiration, password, email
+        )
 
         // Check empty notifications
         checkEmptyNotifcations(linearLayoutRecent,noRecentNotificationLayout)
@@ -88,26 +100,41 @@ class Home : Fragment() {
         return view
     }
 
-    private fun displayContractExpiration(view: View){
-        // References (For Notification Layout)
-        customLayoutNotification = layoutInflater.inflate(R.layout.layout_notification, null, false) as ViewGroup
-        txtNotifDescription = customLayoutNotification.findViewById(R.id.txt_notif_description)
-        txtNotifTitle = customLayoutNotification.findViewById(R.id.txt_notif_title)
-        imgNotif = customLayoutNotification.findViewById(R.id.img_notif)
-        linearLayoutRecentContainer = customLayoutNotification.findViewById(R.id.linearLayout_notificationContainer)
+    private fun displayContractExpiration(view: View, context: Context, jsonArray: JSONArray){
+        if (jsonArray.length() <= 0) return
 
-        // Get days left of contract expiration
-        contractDaysLeft = SetDate().getDaysLeft(SetDate().contractEndDate) // TODO Contract ENd Date Here, replace "SetDate().contractEndDate"
-        val yellowColorHex = "#F29D38"
-        val redColorHex = "#FF0000"
+        if (!jsonArray.getJSONObject(0).has("login")) //if login did not fail
+        {
+            val contract = jsonArray.getJSONObject(0)
 
-        // Update and display Contract Expiration Notification (always display it at top)
-        if (contractDaysLeft == 0) updateContractExpirationNotification(view,true,redColorHex)
-        else if (contractDaysLeft <= 7) updateContractExpirationNotification(view,false,redColorHex)
-        else if (contractDaysLeft <= 31) updateContractExpirationNotification(view,false,yellowColorHex)
+            activity?.runOnUiThread {
+                // References (For Notification Layout)
+                customLayoutNotification = layoutInflater.inflate(R.layout.layout_notification, null, false) as ViewGroup
+                txtNotifDescription = customLayoutNotification.findViewById(R.id.txt_notif_description)
+                txtNotifTitle = customLayoutNotification.findViewById(R.id.txt_notif_title)
+                imgNotif = customLayoutNotification.findViewById(R.id.img_notif)
+                linearLayoutRecentContainer = customLayoutNotification.findViewById(R.id.linearLayout_notificationContainer)
 
-        // Remove Contract Expiration Notification
-        if (contractDaysLeft < 0 || contractDaysLeft > 31) linearLayoutRecent.removeView(customLayoutNotification)
+                // Get days left of contract expiration
+                contractDaysLeft = SetDate().getDaysLeft(contract.getString("end_date"))
+                val yellowColorHex = "#F29D38"
+                val redColorHex = "#FF0000"
+
+                // Update and display Contract Expiration Notification (always display it at top)
+                if (contractDaysLeft == 0) updateContractExpirationNotification(view,true,redColorHex)
+                else if (contractDaysLeft <= 7) updateContractExpirationNotification(view,false,redColorHex)
+                else if (contractDaysLeft <= 31) updateContractExpirationNotification(view,false,yellowColorHex)
+
+                // Remove Contract Expiration Notification
+                if (contractDaysLeft < 0 || contractDaysLeft > 31) linearLayoutRecent.removeView(customLayoutNotification)
+            }
+        }
+        else
+        {
+            //login failed
+            //TODO GO BACK TO LOGIN PAGE TEST
+            context.startActivity(Intent(context, LoginActivity::class.java))
+        }
     }
 
     @SuppressLint("SetTextI18n")

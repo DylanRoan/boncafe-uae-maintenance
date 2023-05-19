@@ -89,8 +89,6 @@ class BookingSummary : Fragment() {
         }
 
         btnConfirm.setOnClickListener {
-            popUpWindow(view.context)
-
             val prefName = "com.boncafe_maintenance.app"
             val prefs = view.context.getSharedPreferences(prefName, AppCompatActivity.MODE_PRIVATE)
 
@@ -112,26 +110,14 @@ class BookingSummary : Fragment() {
                     "<h3><b>Serial Number(s)</b></h3>${txtSerialNumbers.text.toString().replace("\n", "<br>")}" +
                     "<h3><b>Details</b></h3>${txtIssue.text}"
 
-            NetworkFunctions().emailRequest(view.context, ::emailSent, password, email, text, html)
+            popUpWindow(view.context, email, password, text, html)
         }
 
         return view
     }
 
-    fun emailSent(context : Context, json : JSONArray)
-    {
-        Log.d("BACKEND", json.toString())
-
-        if (!json.getJSONObject(0).has("login")) {
-            //TODO CONFIRM EMAIL SENT
-        } //login failed
-        else {
-            context.startActivity(Intent(context, LoginActivity::class.java))
-        }
-    }
-
     @SuppressLint("SetTextI18n")
-    private fun popUpWindow(context: Context){
+    private fun popUpWindow(context: Context, email: String, password: String, text: String, html: String){
         // Referencing
         val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
         val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
@@ -160,9 +146,7 @@ class BookingSummary : Fragment() {
         btnYes.setOnClickListener {
             myPopup.dismiss()
 
-            // TODO Code here for sending to email
-
-            popUpWindowConfirmed(context)
+            NetworkFunctions().emailRequest(context, ::popUpWindowConfirmed, password, email, text, html)
         }
 
         btnNo.setOnClickListener {
@@ -171,40 +155,48 @@ class BookingSummary : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun popUpWindowConfirmed(context: Context){
-        // Referencing
-        val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
-        val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
-        val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
-        val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
-        val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
-        val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
-        val btnLayout = popupBinding.findViewById<LinearLayout>(R.id.layout_window_buttons)
-        val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
+    private fun popUpWindowConfirmed(context : Context, json : JSONArray){
+        if (!json.getJSONObject(0).has("login")) {
+            activity?.runOnUiThread {
+                // Referencing
+                val popupBinding = layoutInflater.inflate(R.layout.window_confirmation, null)
+                val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
+                val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
+                val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
+                val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
+                val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
+                val btnLayout = popupBinding.findViewById<LinearLayout>(R.id.layout_window_buttons)
+                val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
 
-        // Set Header and description
-        popupHeader.text = "SUCCESS"
-        popupText.text = "Your issue has been sent.\nPlease wait for us to reach out to you to set up an appointment."
-        btnYes.text = "OK"
+                // Set Header and description
+                popupHeader.text = "SUCCESS"
+                popupText.text =
+                    "Your issue has been sent.\nPlease wait for us to reach out to you to set up an appointment."
+                btnYes.text = "OK"
 
-        btnNo.visibility = View.GONE
-        backButton.visibility = View.GONE
+                btnNo.visibility = View.GONE
+                backButton.visibility = View.GONE
 
-        //Make pop-window as Dialog
-        val myPopup= Dialog(context)
-        myPopup.setContentView(popupBinding)
+                //Make pop-window as Dialog
+                val myPopup = Dialog(context)
+                myPopup.setContentView(popupBinding)
 
-        //Display pop-up window
-        myPopup.setCancelable(true)
-        myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        myPopup.show()
+                //Display pop-up window
+                myPopup.setCancelable(true)
+                myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                myPopup.show()
 
-        btnYes.setOnClickListener {
-            context.startActivity(Intent(context, HomeActivity::class.java))
+                btnYes.setOnClickListener {
+                    context.startActivity(Intent(context, HomeActivity::class.java))
+                }
+
+                myPopup.setOnCancelListener {
+                    context.startActivity(Intent(context, HomeActivity::class.java))
+                }
+            }
         }
-
-        myPopup.setOnCancelListener {
-            context.startActivity(Intent(context, HomeActivity::class.java))
+        else {
+            context.startActivity(Intent(context, LoginActivity::class.java))
         }
     }
 
