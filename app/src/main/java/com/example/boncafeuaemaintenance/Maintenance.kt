@@ -91,6 +91,7 @@ class Maintenance : Fragment() {
         {
             // View references
             val contractPeriodLayout = view.findViewById<LinearLayout>(R.id.AMC_period_container)
+            val noProductsContractLayout = view.findViewById<LinearLayout>(R.id.layout_no_products_contract)
             val lastMaintenanceLayout =
                 view.findViewById<LinearLayout>(R.id.lastMaintenance_container)
 
@@ -101,7 +102,7 @@ class Maintenance : Fragment() {
             if (!contract.has("contract")) {
                 activity?.runOnUiThread {
                     // Update maintenance due date
-                    SetDate().updateLastMaintenanceDate(view, contract.getString("maintenance"))
+                    SetDate().updateMaintenanceDueDate(view, contract.getString("maintenance"))
 
                     // Update contract ending date
                     SetDate().updateContractDaysLeft(
@@ -113,6 +114,7 @@ class Maintenance : Fragment() {
                     // Set maintenance and contract layout visibility
                     contractPeriodLayout.visibility = View.VISIBLE
                     lastMaintenanceLayout.visibility = View.VISIBLE
+                    noProductsContractLayout.visibility = View.GONE
                 }
             }
         }

@@ -40,6 +40,23 @@ class SetDate{
         else txtDateMaintenance.setTextColor(Color.parseColor("#FF0000"))
     }
 
+    // Update maintenance due date
+    @SuppressLint("SetTextI18n")
+    fun updateMaintenanceDueDate(view: View, passMaintenanceDueDate: String){
+        val daysLeft = getDaysLeft(passMaintenanceDueDate)
+
+        // Update maintenance due date text
+        val txtMaintanceDueDate = view.findViewById<TextView>(R.id.txt_date_maintenance)
+        txtMaintanceDueDate.text = passMaintenanceDueDate
+
+        // Update text color of number of days ago
+        val txtDateMaintenanceDays = view.findViewById<TextView>(R.id.txt_maintenancedue_daysleft)
+        txtDateMaintenanceDays.text = "($daysLeft Days Left)"
+        if (daysLeft <= 7) txtDateMaintenanceDays.setTextColor(Color.parseColor("#FF0000"))
+        else if (daysLeft <= 31)  txtDateMaintenanceDays.setTextColor(Color.parseColor("#F29D38"))
+        else  txtDateMaintenanceDays.setTextColor(Color.parseColor("#009B06"))
+    }
+
     // Update contract date ending
     @SuppressLint("SetTextI18n")
     fun updateContractDaysLeft(view: View, passStartContactDate: String, passEndContactDate: String ){
