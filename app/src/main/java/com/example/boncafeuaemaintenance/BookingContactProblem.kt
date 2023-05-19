@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.fragment.app.activityViewModels
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +31,36 @@ class BookingContactProblem : Fragment() {
         }
     }
 
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        //declare view
+        val view = inflater.inflate(R.layout.fragment_booking_contact_problem, container, false)
+
+        val phoneEditText = view.findViewById<EditText>(R.id.input_phoneNum)
+        val locationEditText = view.findViewById<EditText>(R.id.input_location)
+        val detailsEditText = view.findViewById<EditText>(R.id.input_issue)
+
+        sharedViewModel.setPhoneNumber(phoneEditText.text.toString())
+        phoneEditText.setOnFocusChangeListener { v, hasFocus ->
+            sharedViewModel.setPhoneNumber(phoneEditText.text.toString())
+        }
+
+        sharedViewModel.setLocation(locationEditText.text.toString())
+        locationEditText.setOnFocusChangeListener { v, hasFocus ->
+            sharedViewModel.setLocation(locationEditText.text.toString())
+        }
+
+        sharedViewModel.setDetails(detailsEditText.text.toString())
+        detailsEditText.setOnFocusChangeListener { v, hasFocus ->
+            sharedViewModel.setDetails(detailsEditText.text.toString())
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_booking_contact_problem, container, false)
+        return view
     }
 
     companion object {

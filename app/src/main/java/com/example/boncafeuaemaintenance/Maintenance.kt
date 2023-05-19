@@ -2,6 +2,7 @@ package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -59,46 +60,92 @@ class Maintenance : Fragment() {
         // Inflate layout for this fragment
         val view = inflater.inflate(R.layout.fragment_maintenance, container, false)
 
-        // View references
-        val contractPeriodLayout = view.findViewById<LinearLayout>(R.id.AMC_period_container)
-        val lastMaintenanceLayout = view.findViewById<LinearLayout>(R.id.lastMaintenance_container)
-
         //get preference
         val prefName = "com.boncafe_maintenance.app"
         val prefs = view.context.getSharedPreferences(prefName, AppCompatActivity.MODE_PRIVATE)
 
-        val productsString = prefs.getString("$prefName.products", "[]").toString()
-        val contractString = prefs.getString("$prefName.contract", "[]").toString()
+        val email = prefs.getString("$prefName.email", "none") as String
+        val password = prefs.getString("$prefName.password", "none") as String
 
-        //change to json object / array
-        val products = JSONArray(productsString)
-        val contract = if (JSONArray(contractString).length() > 0) JSONArray(contractString).getJSONObject(0) else JSONObject("{'contract': 'none'}")
-
-        Log.i("BACKEND : PRODUCT PREF", products.toString()) // DEBUG TODO REMOVE
-        Log.i("BACKEND : CONTRACT PREF", contract.toString()) // DEBUG TODO REMOVE
-
-        // Check if user has contract
-        if (!contract.has("contract")){
-            // Update maintenance due date
-            SetDate().updateLastMaintenanceDate(view, contract.getString("maintenance"))
-
-            // Update contract ending date
-            SetDate().updateContractDaysLeft(view, contract.getString("start_date"),contract.getString("end_date"))
-
-            // Set maintenance and contract layout visibility
-            contractPeriodLayout.visibility = View.VISIBLE
-            lastMaintenanceLayout.visibility = View.VISIBLE
-        } else {
-            // Set maintenance and contract layout visibility
-            contractPeriodLayout.visibility = View.GONE
-            lastMaintenanceLayout.visibility = View.GONE
-        }
-
-        // Display user's owned coffee machines
-        val mainLayout = view.findViewById<LinearLayout>(R.id.main_layout)
-        createOwnedCoffeeMachines(mainLayout, products)
+        //contract network call
+        NetworkFunctions().maintenancePageRequest(view, view.context,
+            "https://boncafe-backend.herokuapp.com/contract",
+            ::setContract, password, email
+        )
+        //product network call
+        NetworkFunctions().maintenancePageRequest(view, view.context,
+            "https://boncafe-backend.herokuapp.com/table",
+            ::setProducts, password, email
+        )
 
         return view
+    }
+
+    fun setContract(view : View, context : Context, jsonArray: JSONArray)
+    {
+        Log.i("BACKEND : CONTRACT", jsonArray.toString()) // DEBUG TODO
+
+        if (!jsonArray.getJSONObject(0).has("login")) //if login did not fail
+        {
+            // View references
+            val contractPeriodLayout = view.findViewById<LinearLayout>(R.id.AMC_period_container)
+            val lastMaintenanceLayout =
+                view.findViewById<LinearLayout>(R.id.lastMaintenance_container)
+
+            val contract =
+                if (jsonArray.length() > 0) jsonArray.getJSONObject(0) else JSONObject("{'contract': 'none'}")
+
+            // Check if user has contract
+            if (!contract.has("contract")) {
+                activity?.runOnUiThread {
+                    // Update maintenance due date
+                    SetDate().updateLastMaintenanceDate(view, contract.getString("maintenance"))
+
+                    // Update contract ending date
+                    SetDate().updateContractDaysLeft(
+                        view,
+                        contract.getString("start_date"),
+                        contract.getString("end_date")
+                    )
+
+                    // Set maintenance and contract layout visibility
+                    contractPeriodLayout.visibility = View.VISIBLE
+                    lastMaintenanceLayout.visibility = View.VISIBLE
+                }
+            } else {
+                // Set maintenance and contract layout visibility
+                activity?.runOnUiThread {
+                    contractPeriodLayout.visibility = View.GONE
+                    lastMaintenanceLayout.visibility = View.GONE
+                }
+            }
+        }
+        else
+        {
+            //login failed
+            //TODO GO BACK TO LOGIN PAGE TEST
+            context.startActivity(Intent(context, LoginActivity::class.java))
+        }
+    }
+
+    fun setProducts(view : View, context : Context, jsonArray: JSONArray)
+    {
+        Log.i("BACKEND : PRODUCTS", jsonArray.toString()) // DEBUG TODO
+
+        if (!jsonArray.getJSONObject(0).has("login")) //if login did not fail
+        {
+            // Display user's owned coffee machines
+            activity?.runOnUiThread {
+                val mainLayout = view.findViewById<LinearLayout>(R.id.main_layout)
+                createOwnedCoffeeMachines(mainLayout, jsonArray)
+            }
+        }
+        else
+        {
+            //login failed
+            //TODO GO BACK TO LOGIN PAGE TEST
+            context.startActivity(Intent(context, LoginActivity::class.java))
+        }
     }
 
 

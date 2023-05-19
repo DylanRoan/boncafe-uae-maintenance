@@ -102,17 +102,19 @@ class BookingCoffeeMachines : Fragment() {
                 // Store new EditText's Serial Number ID to HashSet
                 storeInputSerialIDs.add(newInputSerialID)
 
+                //instantiate the item
+                sharedViewModel.setSerialID(inputSerial.hint.toString(), inputSerial.text.toString())
+
                 // Store inputted Serial Number text to ViewModel
                 inputSerial.setOnFocusChangeListener { v, hasFocus ->
 
-                    // Check if user finishes using EditText and check if its not empty or doesn't include any whitespaces
-                    if (!hasFocus && inputSerial.text.trim().toString().isNotEmpty()) {
-                        // Get EditText's text
-                        val enteredText = inputSerial.text.toString()
+                    Log.i("BACKEND", "HAS FOCUS ${inputSerial.text.toString()}")
 
-                        // Pass the inputted text to ViewModel
-                        sharedViewModel.setSerialID(inputSerial.hint.toString(), enteredText)
-                    }
+                    // Get EditText's text
+                    val enteredText = inputSerial.text.toString()
+
+                    // Pass the inputted text to ViewModel
+                    sharedViewModel.setSerialID(inputSerial.hint.toString(), enteredText)
                 }
             }
         }
@@ -130,10 +132,8 @@ class BookingCoffeeMachines : Fragment() {
                 val lastInputSerialView = view.findViewById<EditText>(lastInputSerialID)
 
                 // Remove serial ID from ViewModel
-                if (lastInputSerialView.text.trim().toString().isNotEmpty()){
-                    val lastCountViewHint = lastInputSerialView.hint.toString()
-                    sharedViewModel.removeSerialID(lastCountViewHint)
-                }
+                val lastCountViewHint = lastInputSerialView.hint.toString()
+                sharedViewModel.removeSerialID(lastCountViewHint)
 
                 // Remove EditText
                 linearLayoutCoffeeMachines.removeView(lastInputSerialView)
@@ -142,6 +142,8 @@ class BookingCoffeeMachines : Fragment() {
                 storeInputSerialIDs.remove(lastInputSerialID)
             }
         }
+
+        sharedViewModel.removeSerialID("") //instantiates the text in the summary page TODO
         
         return view
     }

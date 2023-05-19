@@ -7,9 +7,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -23,6 +24,8 @@ class LoginActivity : AppCompatActivity() {
     var email = ""
     var password = ""
 
+    //save to saved preferences
+    val prefName = "com.boncafe_maintenance.app"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -38,6 +41,8 @@ class LoginActivity : AppCompatActivity() {
             else params.height = 80
 
             connection_error.layoutParams = params
+
+            if (hasNetwork) rememberMe()
         }
 
         // Set color to a specific TextView's text
@@ -50,11 +55,11 @@ class LoginActivity : AppCompatActivity() {
                 // Login
                 password = input_password.text.toString()
                 email = input_email.text.toString()
-                NetworkFunctions().loginRequest(this, "https://boncafe-backend.herokuapp.com/login", ::getInfo, password, email)
+                NetworkFunctions().loginRequest(this, "https://boncafe-backend.herokuapp.com/login", ::login, password, email)
 
             } else {
-                // Open pop-up window
-                popUpWindow()
+                // NO WIFI MESSAGE CUZ YOURE TRYNA LOGIN FOR SOME REASON
+                Toast.makeText(this, "No connection.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -66,61 +71,62 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    //save to saved preferences
-    val prefName = "com.boncafe_maintenance.app"
+    fun rememberMe()
+    {
+        //check if remember me is true
+        val prefs = getSharedPreferences(prefName, MODE_PRIVATE)
+        var rememberMe = prefs.getBoolean("$prefName.remember_me", false)
+        Log.i("BACKEND", "REMEMBER ME $rememberMe")
+        if (rememberMe)
+        {
+            email = prefs.getString("$prefName.email", "none") as String
+            password = prefs.getString("$prefName.password", "none") as String
+
+            if (email != "none" && password != "none")
+            {
+                if (hasNetwork)
+                {
+                    // Login
+                    Log.i("BACKEND", "LOGGING IN")
+                    NetworkFunctions().loginRequest(this, "https://boncafe-backend.herokuapp.com/login", ::login, password, email)
+                }
+            }
+        }
+    }
 
     // Get info after login
-    fun getInfo(context : Context, json : JSONArray){
+    fun login(context : Context, json : JSONArray){
         val jsonobj = json.getJSONObject(0)
-        if (jsonobj.has("confirmed"))
+
+        Log.i("BACKEND", "LOGIN: $jsonobj")
+        val prefs = context.getSharedPreferences(prefName, MODE_PRIVATE)
+
+        if (!jsonobj.has("login"))
         {
-            val prefs = context.getSharedPreferences(prefName, MODE_PRIVATE)
             prefs.edit().putString("$prefName.email", email).apply() //insecure
             prefs.edit().putString("$prefName.password", password).apply() //insecure
+            prefs.edit().putString("$prefName.name", jsonobj.getString("name")).apply() //insecure
 
             //check if remember me is true
             if (check_remember_me.isChecked) {
-                //not required at the moment
                 prefs.edit().putBoolean("$prefName.remember_me", true).apply() //insecure
             }
 
-            //get products
-            NetworkFunctions().loginRequest(context, "https://boncafe-backend.herokuapp.com/table", ::getContract, password, email)
-
+            //go home
+            startActivity(Intent(context, HomeActivity::class.java))
 
         }
         else {
             //FAILED LOGIN MESSAGE : TODO
+            runOnUiThread {
+                val failedLogin = findViewById<TextView>(R.id.txt_warning_incorrect)
+                failedLogin.visibility = View.VISIBLE
+            }
+
+            prefs.edit().putString("$prefName.email", "none").apply() //insecure
+            prefs.edit().putString("$prefName.password", "none").apply() //insecure
+            prefs.edit().putBoolean("$prefName.remember_me", false).apply() //insecure
         }
-    }
-
-    //get contract after getting products
-    fun getContract(context : Context, json : JSONArray){
-        val jsonobj = json.getJSONObject(0)
-        if (!jsonobj.has("confirmed"))
-        {
-            val prefs = context.getSharedPreferences(prefName, MODE_PRIVATE)
-            prefs.edit().putString("$prefName.products", json.toString()).apply()
-        }
-
-        Log.i("BACKEND : PRODUCT DB", json.toString()) // DEBUG TODO REMOVE
-
-        //go to home page after getting contract
-        NetworkFunctions().loginRequest(context, "https://boncafe-backend.herokuapp.com/contract", ::goToHome, password, email)
-    }
-
-    //go to home page after receiving contract
-    fun goToHome(context : Context, json : JSONArray) {
-        Log.i("BACKEND : CONTRACT DB", json.toString()) // DEBUG TODO REMOVE
-
-        if(json.length() > 0)
-        {
-            val prefs = context.getSharedPreferences(prefName, MODE_PRIVATE)
-            prefs.edit().putString("$prefName.contract", json.toString()).apply()
-        }
-
-        //go home
-        startActivity(Intent(context, HomeActivity::class.java))
     }
 
     // Pop-Up Window

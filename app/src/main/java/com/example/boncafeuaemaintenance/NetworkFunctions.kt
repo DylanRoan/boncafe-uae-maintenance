@@ -93,11 +93,11 @@ class NetworkFunctions {
         })
     }
 
-    fun getProducts(
+    fun maintenancePageRequest(
+        view: View,
         context: Context,
         url: String,
-        func: (Context, JSONArray, View) -> Unit,
-        view: View,
+        func: (View, Context, JSONArray) -> Unit,
         password: String,
         email: String
     ) {
@@ -127,8 +127,44 @@ class NetworkFunctions {
 
                         var obj = JSONArray(objstring)
 
-                        func(context, obj, view)
+                        func(view, context, obj)
                     }
+                }
+            }
+
+        })
+    }
+
+    //boncafe-backend.herokuapp.com/email
+    fun emailRequest(
+        context: Context,
+        func: (Context, JSONArray) -> Unit,
+        password: String,
+        email: String,
+        text: String,
+        html: String
+    ) {
+        val formBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("email", email)
+            .addFormDataPart("password", password)
+            .addFormDataPart("text", text)
+            .addFormDataPart("html", html)
+            .build()
+
+        val request = Request.Builder()
+            .url("http://boncafe-backend.herokuapp.com/email")
+            .post(formBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {e.printStackTrace()}
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                    response.body()?.string()?.let { setToJson(it, context, func) }
                 }
             }
 
