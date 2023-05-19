@@ -49,7 +49,7 @@ class Booking : Fragment() {
         val buttonNewBooking = view.findViewById<Button>(R.id.btn_newBooking)
 
         // Display list of bookings
-        for (i in 0..5){
+        /*for (i in 0..5){
             val customLayoutBooking = layoutInflater.inflate(R.layout.layout_bookings_reports, container, false)
             mainLayout.addView(customLayoutBooking)
 
@@ -57,7 +57,7 @@ class Booking : Fragment() {
             customLayoutBooking.setOnClickListener {
                 // code
             }
-        }
+        }*/
 
         // 'Add New Booking' button
         buttonNewBooking.setOnClickListener{

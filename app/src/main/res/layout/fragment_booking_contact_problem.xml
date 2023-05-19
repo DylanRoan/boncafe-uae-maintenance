@@ -68,7 +68,6 @@
             android:id="@+id/input_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="9"
             android:inputType="text"
             android:padding="8dp"
             android:singleLine="true"

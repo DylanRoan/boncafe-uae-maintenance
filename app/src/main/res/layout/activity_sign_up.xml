@@ -16,184 +16,201 @@
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         tools:ignore="ContentDescription,UnusedAttribute" />
 
-    <ImageView
-        android:id="@+id/img_signup"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/img_signup"
-        tools:ignore="ContentDescription" />
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="SIGN UP"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:textColor="#000"
-        android:fontFamily="@font/montserratt"
-        tools:ignore="HardcodedText" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/txtInputLayout_fullName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:hint="Full Name"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        tools:ignore="HardcodedText">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_fullName"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/main_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:singleLine="true"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/txtInputLayout_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:hint="Email"
-        app:startIconDrawable="@drawable/baseline_email_24"
-        app:endIconMode="clear_text"
-        tools:ignore="HardcodedText">
+            <ImageView
+                android:id="@+id/img_signup"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/img_signup"
+                tools:ignore="ContentDescription" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:singleLine="true"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="SIGN UP"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textColor="#000"
+                android:fontFamily="@font/montserratt"
+                tools:ignore="HardcodedText" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/txtInputLayout_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:hint="Username"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        app:endIconMode="clear_text"
-        tools:ignore="HardcodedText">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/txtInputLayout_fullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:hint="Full Name"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                tools:ignore="HardcodedText">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:singleLine="true"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_fullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textColorHint="#757575"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/txtInputLayout_pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:hint="Password"
-        app:startIconDrawable="@drawable/baseline_lock_24"
-        app:endIconMode="password_toggle"
-        tools:ignore="HardcodedText">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/txtInputLayout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:hint="Email"
+                app:startIconDrawable="@drawable/baseline_email_24"
+                app:endIconMode="clear_text"
+                tools:ignore="HardcodedText">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:padding="8dp"
-            android:singleLine="true"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textColorHint="#757575"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/txtInputLayout_confirmPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:hint="Confirm Password"
-        app:startIconDrawable="@drawable/baseline_check_circle_24"
-        app:endIconMode="password_toggle"
-        tools:ignore="HardcodedText">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/txtInputLayout_user"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:hint="Username"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:endIconMode="clear_text"
+                tools:ignore="HardcodedText">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_confirmPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:padding="8dp"
-            android:singleLine="true"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textColorHint="#757575"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/txt_terms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:fontFamily="@font/montserratt"
-        android:text="By signing up, you agree to our Terms &amp; Conditions and Privacy Policy"
-        android:textColor="#000"
-        android:textSize="12sp"
-        tools:ignore="HardcodedText" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/txtInputLayout_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:hint="Password"
+                app:startIconDrawable="@drawable/baseline_lock_24"
+                app:endIconMode="password_toggle"
+                tools:ignore="HardcodedText">
 
-    <TextView
-        android:id="@+id/txt_warning_enterBlankFields"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="2dp"
-        android:fontFamily="@font/montserratt"
-        android:text="* Please enter all blank fields"
-        android:textColor="#ff0000"
-        android:textSize="12sp"
-        tools:ignore="HardcodedText,TextContrastCheck" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textColorHint="#757575"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/txt_warning_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:fontFamily="@font/montserratt"
-        android:text="* Please confirm the correct password"
-        android:textColor="#ff0000"
-        android:textSize="12sp"
-        tools:ignore="HardcodedText,TextContrastCheck" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/txtInputLayout_confirmPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:hint="Confirm Password"
+                app:startIconDrawable="@drawable/baseline_check_circle_24"
+                app:endIconMode="password_toggle"
+                tools:ignore="HardcodedText">
 
-    <Button
-        android:id="@+id/btn_createAccount"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="5dp"
-        android:backgroundTint="#FF8300"
-        android:text="CREATE ACCOUNT"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/montserratt"
-        android:letterSpacing="0"
-        tools:ignore="HardcodedText,TextContrastCheck" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_confirmPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textColorHint="#757575"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/txt_terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="@font/montserratt"
+                android:text="By signing up, you agree to our Terms &amp; Conditions and Privacy Policy"
+                android:textColor="#000"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_warning_enterBlankFields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/montserratt"
+                android:text="* Please enter all blank fields"
+                android:textColor="#ff0000"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/txt_warning_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/montserratt"
+                android:text="* Please confirm the correct password"
+                android:textColor="#ff0000"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <Button
+                android:id="@+id/btn_createAccount"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:backgroundTint="#FF8300"
+                android:text="CREATE ACCOUNT"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserratt"
+                android:letterSpacing="0"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>
