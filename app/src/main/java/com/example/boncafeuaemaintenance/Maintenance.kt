@@ -1,9 +1,11 @@
 package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -23,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_maintenance.*
 import org.json.JSONArray
 import org.json.JSONObject
 import org.w3c.dom.Text
+import pl.droidsonroids.gif.GifImageView
 import java.time.format.DateTimeFormatter
 import java.time.LocalDate
 
@@ -78,6 +82,12 @@ class Maintenance : Fragment() {
             "https://boncafe-backend.herokuapp.com/table",
             ::setProducts, password, email
         )
+
+        // Renew contract button
+        val btnRenewContract = view.findViewById<Button>(R.id.btn_renewContract)
+        btnRenewContract.setOnClickListener {
+            popUpWindow(view.context)
+        }
 
         return view
     }
@@ -171,6 +181,80 @@ class Maintenance : Fragment() {
             txtPurchased.text = SetDate().formatDateConvert(product.getString("maintenance_due")) // TODO CHANGE DATE / DELETE LATER
 
             mainLayout.addView(layoutCoffeeMachine)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun popUpWindow(context: Context){
+        // Referencing
+        val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
+        val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
+        val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
+        val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
+        val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
+        val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
+        val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
+
+        // Set Header and description
+        popupHeader.text = "CONFIRMATION"
+        popupText.text = "Do you want to renew your contract?"
+
+        popupGif.visibility = View.GONE
+        backButton.visibility = View.GONE
+
+        //Make pop-window as Dialog
+        val myPopup= Dialog(context)
+        myPopup.setContentView(popupBinding)
+
+        //Display pop-up window
+        myPopup.setCancelable(true)
+        myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myPopup.show()
+
+        btnYes.setOnClickListener {
+            myPopup.dismiss()
+
+            // TODO Send email for contract renewal
+
+            popUpWindowConfirmed(context)
+        }
+
+        btnNo.setOnClickListener {
+            myPopup.dismiss()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun popUpWindowConfirmed(context: Context){
+        // Referencing
+        val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
+        val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
+        val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
+        val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
+        val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
+        val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
+        val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
+
+        // Set Header and description
+        popupHeader.text = "SUCCESS"
+        popupText.text = "Your contract renewal has been sent to our email."
+        btnYes.text = "OK"
+
+        popupGif.visibility = View.VISIBLE
+        btnNo.visibility = View.GONE
+        backButton.visibility = View.GONE
+
+        //Make pop-window as Dialog
+        val myPopup= Dialog(context)
+        myPopup.setContentView(popupBinding)
+
+        //Display pop-up window
+        myPopup.setCancelable(true)
+        myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myPopup.show()
+
+        btnYes.setOnClickListener {
+            myPopup.dismiss()
         }
     }
 

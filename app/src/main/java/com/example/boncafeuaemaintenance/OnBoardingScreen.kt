@@ -1,6 +1,7 @@
 package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -31,9 +32,9 @@ class OnBoardingScreen : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
 
                 if (position==layoutList.lastIndex){
-                    btn_renewContract.visibility = View.VISIBLE
+                    btn_getStarted.visibility = View.VISIBLE
                 } else {
-                    btn_renewContract.visibility = View.GONE
+                    btn_getStarted.visibility = View.INVISIBLE
                 }
 
                 if (position==0){
@@ -43,5 +44,13 @@ class OnBoardingScreen : AppCompatActivity() {
                 }
             }
         })
+
+        txt_skip.setOnClickListener {
+            this.startActivity(Intent(this,LoginActivity::class.java))
+        }
+
+        btn_getStarted.setOnClickListener {
+            this.startActivity(Intent(this,LoginActivity::class.java))
+        }
     }
 }

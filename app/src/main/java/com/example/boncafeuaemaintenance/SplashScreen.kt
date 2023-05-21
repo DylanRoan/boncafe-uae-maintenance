@@ -18,7 +18,7 @@ class SplashScreen : AppCompatActivity() {
 
         Timer().schedule(5)
         {
-            var mainActivity = Intent(this@SplashScreen, MainActivity::class.java)
+            var mainActivity = Intent(this@SplashScreen, OnBoardingScreen::class.java)
             startActivity(mainActivity)
         }
     }

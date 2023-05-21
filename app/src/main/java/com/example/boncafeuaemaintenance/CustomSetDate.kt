@@ -47,7 +47,7 @@ class SetDate{
 
         // Update maintenance due date text
         val txtMaintanceDueDate = view.findViewById<TextView>(R.id.txt_date_maintenance)
-        txtMaintanceDueDate.text = passMaintenanceDueDate.substring(0,10)
+        txtMaintanceDueDate.text = formatDateConvert(passMaintenanceDueDate.substring(0,10))
 
         // Update text color of number of days ago
         val txtDateMaintenanceDays = view.findViewById<TextView>(R.id.txt_maintenancedue_daysleft)
