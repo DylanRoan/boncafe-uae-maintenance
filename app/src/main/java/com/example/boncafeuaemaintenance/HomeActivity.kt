@@ -1,6 +1,7 @@
 package com.example.boncafeuaemaintenance
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -87,9 +89,20 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer_layout.openDrawer(GravityCompat.START)
         }
 
+        //set header of side view name and email
+        val prefName = "com.boncafe_maintenance.app"
+        val prefs = getSharedPreferences(prefName, MODE_PRIVATE)
+        val name = prefs.getString("$prefName.name", "Full Name")
+        val email = prefs.getString("$prefName.email", "username@email.com")
+
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.txt_fullName).text = name
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.txt_email).text = email
+
         // Functional social media buttons
         openSocialMedias()
     }
+
+
 
     // For selecting items in Drawer Menu
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
