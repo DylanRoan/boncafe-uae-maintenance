@@ -24,6 +24,15 @@
             android:theme="?attr/actionBarTheme"
             tools:layout_editor_absoluteX="1dp">
 
+            <ImageView
+                android:id="@+id/icon_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="left"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@drawable/baseline_arrow_back_ios_white_24"
+                tools:ignore="ContentDescription,ImageContrastCheck,UnusedAttribute" />
+
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"

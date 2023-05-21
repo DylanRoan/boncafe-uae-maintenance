@@ -119,6 +119,11 @@ class BookingCreate : AppCompatActivity(), LifecycleOwner {
 
             checkButtonVisibility()
         }
+
+        // Back button
+        icon_back.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     // Create/Initialise single instance of ObjectAnimator (to avoid lag issues)
