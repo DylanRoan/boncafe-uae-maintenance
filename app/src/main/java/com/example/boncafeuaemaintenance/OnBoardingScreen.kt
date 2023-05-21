@@ -53,4 +53,8 @@ class OnBoardingScreen : AppCompatActivity() {
             this.startActivity(Intent(this,LoginActivity::class.java))
         }
     }
+
+    override fun onBackPressed() {
+        // nothing
+    }
 }

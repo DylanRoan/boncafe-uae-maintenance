@@ -44,29 +44,48 @@ class SetDate{
     @SuppressLint("SetTextI18n")
     fun updateMaintenanceDueDate(view: View, passMaintenanceDueDate: String){
         val daysLeft = getDaysLeft(passMaintenanceDueDate)
+        val daysAgo = getDaysAgo(passMaintenanceDueDate)
+
+        // Date Conversion
+        val monthsAgo = daysAgo / 30
+        val yearsAgo = monthsAgo / 12
 
         // Update maintenance due date text
         val txtMaintanceDueDate = view.findViewById<TextView>(R.id.txt_date_maintenance)
         txtMaintanceDueDate.text = formatDateConvert(passMaintenanceDueDate.substring(0,10))
 
-        // Update text color of number of days ago
+        // Update text color of number of days
         val txtDateMaintenanceDays = view.findViewById<TextView>(R.id.txt_maintenancedue_daysleft)
-        txtDateMaintenanceDays.text = "($daysLeft Days Left)"
-        if (daysLeft <= 7) txtDateMaintenanceDays.setTextColor(Color.parseColor("#FF0000"))
-        else if (daysLeft <= 31)  txtDateMaintenanceDays.setTextColor(Color.parseColor("#F29D38"))
-        else  txtDateMaintenanceDays.setTextColor(Color.parseColor("#009B06"))
+        if (daysLeft >= 0){
+            // Display days left til maintenance due
+            txtDateMaintenanceDays.text = "($daysLeft Days Left)"
+            if (daysLeft <= 7) txtDateMaintenanceDays.setTextColor(Color.parseColor("#FF0000"))
+            else if (daysLeft <= 31)  txtDateMaintenanceDays.setTextColor(Color.parseColor("#F29D38"))
+            else  txtDateMaintenanceDays.setTextColor(Color.parseColor("#009B06"))
+        } else {
+            // Display days ago from missed maintenance due
+            if (daysAgo < 31) txtDateMaintenanceDays.text = "(Missed $daysAgo Days Ago)"
+            else if (daysAgo < 365) txtDateMaintenanceDays.text = "(Missed $monthsAgo Months Ago)"
+            else txtDateMaintenanceDays.text = "(Missed $yearsAgo Years Ago)"
+            txtDateMaintenanceDays.setTextColor(Color.parseColor("#FF0000"))
+        }
+
     }
 
     // Update contract date ending
     @SuppressLint("SetTextI18n")
     fun updateContractDaysLeft(view: View, passStartContactDate: String, passEndContactDate: String ){
         val daysLeft = getDaysLeft(passEndContactDate)
+        val daysAgo = getDaysAgo(passEndContactDate)
 
-        // Update Contract's Start Date, End Date and Days left
+        // Date Conversion
+        val monthsAgo = daysAgo / 30
+        val yearsAgo = monthsAgo / 12
+
+        // TextView references
         val txtContractDaysLeft = view.findViewById<TextView>(R.id.txt_contract_daysLeft)
         val txtContractStartDate = view.findViewById<TextView>(R.id.txt_start_date)
         val txtContractEndDate = view.findViewById<TextView>(R.id.txt_end_date)
-        txtContractDaysLeft.text = "($daysLeft Days Left)"
         txtContractStartDate.text = passStartContactDate.substring(0,10) //THIS VIEW IS GONE
         txtContractEndDate.text = passEndContactDate.substring(0,10) // THIS VIEW IS GONE
 
@@ -84,10 +103,20 @@ class SetDate{
         val txtEndMonthYear = view.findViewById<TextView>(R.id.txt_end_month_year)
         txtEndMonthYear.text = "$endMonth, $endYear"
 
-        // Update days left text color
-        if (daysLeft <= 7) txtContractDaysLeft.setTextColor(Color.parseColor("#FF0000"))
-        else if (daysLeft <= 31)  txtContractDaysLeft.setTextColor(Color.parseColor("#F29D38"))
-        else  txtContractDaysLeft.setTextColor(Color.parseColor("#009B06"))
+        // Update text color of number of days
+        if (daysLeft >= 0){
+            // Display days left til contract end date
+            txtContractDaysLeft.text = "($daysLeft Days Left)"
+            if (daysLeft <= 7) txtContractDaysLeft.setTextColor(Color.parseColor("#FF0000"))
+            else if (daysLeft <= 31)  txtContractDaysLeft.setTextColor(Color.parseColor("#F29D38"))
+            else  txtContractDaysLeft.setTextColor(Color.parseColor("#009B06"))
+        } else {
+            // Display days ago if it passed contract end date
+            if (daysAgo < 31) txtContractDaysLeft.text = "(Missed $daysAgo Days Ago)"
+            else if (daysAgo < 365) txtContractDaysLeft.text = "(Missed $monthsAgo Months Ago)"
+            else txtContractDaysLeft.text = "(Missed $yearsAgo Years Ago)"
+            txtContractDaysLeft.setTextColor(Color.parseColor("#FF0000"))
+        }
     }
 
     /**
@@ -101,7 +130,7 @@ class SetDate{
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val pastDate = LocalDate.parse(dateSplit, formatter)
         val currentDate = LocalDate.now()
-        val daysAgo = pastDate.toEpochDay() - currentDate.toEpochDay()
+        val daysAgo =  currentDate.toEpochDay() - pastDate.toEpochDay()
 
         return daysAgo.toInt()
     }

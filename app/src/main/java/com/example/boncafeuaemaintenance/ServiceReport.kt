@@ -1,5 +1,6 @@
 package com.example.boncafeuaemaintenance
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -64,7 +65,7 @@ class ServiceReport : Fragment() {
 
             // Handle clicks for each reports
             customLayoutReports.setOnClickListener {
-                // code
+                view.context.startActivity(Intent(view.context, PDF_Sample::class.java))
             }
         }
 

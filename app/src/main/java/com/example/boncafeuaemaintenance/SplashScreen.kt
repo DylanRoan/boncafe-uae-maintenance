@@ -16,7 +16,7 @@ class SplashScreen : AppCompatActivity() {
 
         startVideo()
 
-        Timer().schedule(5)
+        Timer().schedule(3000)
         {
             var mainActivity = Intent(this@SplashScreen, OnBoardingScreen::class.java)
             startActivity(mainActivity)
@@ -28,7 +28,7 @@ class SplashScreen : AppCompatActivity() {
         var uri = Uri.parse("android.resource://"
                 + packageName
                 + "/"
-                + R.raw.coffee)
+                + R.raw.vid_coffeebeans)
         videoview.setVideoURI(uri)
 
         videoview.setOnPreparedListener { mediaPlayer ->

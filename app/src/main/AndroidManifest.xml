@@ -16,6 +16,9 @@
         android:theme="@style/Theme.BoncafeUAEMaintenance"
         tools:targetApi="31">
         <activity
+            android:name=".PDF_Sample"
+            android:exported="false" />
+        <activity
             android:name=".OnBoardingScreen"
             android:exported="false" />
         <activity

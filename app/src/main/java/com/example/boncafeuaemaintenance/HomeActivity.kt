@@ -130,8 +130,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)){
             // close drawer if user back press
             drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            onBackPressedDispatcher.onBackPressed()
         }
     }
 

@@ -17,6 +17,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONArray
@@ -57,6 +58,9 @@ class Home : Fragment() {
     private lateinit var txtNotifDescription: TextView
     private lateinit var txtNotifTitle: TextView
 
+    // Recent layout
+    private lateinit var noRecentNotificationLayout: RelativeLayout
+
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +71,7 @@ class Home : Fragment() {
         
         // References
         linearLayoutRecent = view.findViewById(R.id.linearLayout_recent)
-        val noRecentNotificationLayout = view.findViewById<RelativeLayout>(R.id.layout_noRecent)
+        noRecentNotificationLayout = view.findViewById(R.id.layout_noRecent)
         val viewFlipperPromotions = view.findViewById<ViewFlipper>(R.id.viewFlipper_promotions)
         val btnBookNow = view.findViewById<Button>(R.id.btn_book_now)
 
@@ -83,9 +87,6 @@ class Home : Fragment() {
             "https://boncafe-backend.herokuapp.com/contract",
             ::displayContractExpiration, password, email
         )
-
-        // Check empty notifications
-        checkEmptyNotifcations(linearLayoutRecent,noRecentNotificationLayout)
 
         // Clickable promotions
         viewFlipperPromotions.setOnClickListener {
@@ -127,6 +128,9 @@ class Home : Fragment() {
 
                 // Remove Contract Expiration Notification
                 if (contractDaysLeft < 0 || contractDaysLeft > 31) linearLayoutRecent.removeView(customLayoutNotification)
+
+                // Check empty notifications
+                checkEmptyNotifcations(linearLayoutRecent,noRecentNotificationLayout)
             }
         }
         else
@@ -170,14 +174,13 @@ class Home : Fragment() {
         linearLayoutRecent.addView(customLayoutNotification, 0)
 
         // Handle clicks
-        if (!expired){
-            customLayoutNotification.setOnClickListener{
-                // code
-            }
-        } else {
-            customLayoutNotification.setOnClickListener{
-                //CustomFunctions().openURL(view, )
-            }
+        customLayoutNotification.setOnClickListener{
+            // Get a reference to the BottomNavigationView
+            val homeActivity = requireActivity()
+            val bottomNavigationView = homeActivity.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+            // Go to maintenance page
+            bottomNavigationView.selectedItemId = R.id.maintenance
         }
     }
 

@@ -163,4 +163,8 @@ class LoginActivity : AppCompatActivity() {
             context.startActivity(Intent(context, LoginActivity::class.java))
         }
     }
+
+    override fun onBackPressed() {
+        // nothing (for disabling back button)
+    }
 }
