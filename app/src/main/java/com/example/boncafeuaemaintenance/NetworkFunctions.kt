@@ -177,7 +177,8 @@ class NetworkFunctions {
         password: String,
         email: String,
         text: String,
-        html: String
+        html: String,
+        subject: String = "Maintenance Request"
     ) {
         val formBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
@@ -185,6 +186,7 @@ class NetworkFunctions {
             .addFormDataPart("password", password)
             .addFormDataPart("text", text)
             .addFormDataPart("html", html)
+            .addFormDataPart("subject", subject)
             .build()
 
         val request = Request.Builder()

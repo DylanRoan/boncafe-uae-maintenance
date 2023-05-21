@@ -154,7 +154,6 @@ class Maintenance : Fragment() {
         else
         {
             //login failed
-            //TODO GO BACK TO LOGIN PAGE TEST
             context.startActivity(Intent(context, LoginActivity::class.java))
         }
     }
@@ -187,7 +186,7 @@ class Maintenance : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun popUpWindow(context: Context, view: View){
         // Referencing
-        val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
+        val popupBinding = layoutInflater.inflate(R.layout.window_confirmation, null)
         val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
         val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
         val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
@@ -203,7 +202,7 @@ class Maintenance : Fragment() {
         backButton.visibility = View.GONE
 
         //Make pop-window as Dialog
-        val myPopup= Dialog(context)
+        val myPopup = Dialog(context)
         myPopup.setContentView(popupBinding)
 
         //Display pop-up window
@@ -216,7 +215,8 @@ class Maintenance : Fragment() {
 
             // TODO Send email for contract renewal
             val prefName = "com.boncafe_maintenance.app"
-            val prefs = view.context.getSharedPreferences(prefName, AppCompatActivity.MODE_PRIVATE)
+            val prefs =
+                view.context.getSharedPreferences(prefName, AppCompatActivity.MODE_PRIVATE)
 
             val email = prefs.getString("$prefName.email", "[]").toString()
             val password = prefs.getString("$prefName.password", "[]").toString()
@@ -227,7 +227,15 @@ class Maintenance : Fragment() {
             var text = "$name is requesting to renew their Annual Maintenance Contract."
             var html = "<p>$name is requesting to renew their Annual Maintenance Contract.</p>"
 
-            NetworkFunctions().emailRequest(context, ::popUpWindowConfirmed, password, email, text, html)
+            NetworkFunctions().emailRequest(
+                context,
+                ::popUpWindowConfirmed,
+                password,
+                email,
+                text,
+                html,
+                subject
+            )
         }
 
         btnNo.setOnClickListener {
@@ -238,35 +246,37 @@ class Maintenance : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun popUpWindowConfirmed(context: Context, jsonArray: JSONArray){
         if (!jsonArray.getJSONObject(0).has("login")){
-            // Referencing
-            val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
-            val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
-            val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
-            val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
-            val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
-            val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
-            val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
+            activity?.runOnUiThread {
+                // Referencing
+                val popupBinding = layoutInflater.inflate(R.layout.window_confirmation,null)
+                val backButton = popupBinding.findViewById<ImageView>(R.id.icon_btn_back)
+                val popupHeader = popupBinding.findViewById<TextView>(R.id.txt_window_header)
+                val popupText = popupBinding.findViewById<TextView>(R.id.txt_window_text)
+                val btnYes = popupBinding.findViewById<Button>(R.id.btn_window_yes)
+                val btnNo = popupBinding.findViewById<Button>(R.id.btn_window_no)
+                val popupGif = popupBinding.findViewById<GifImageView>(R.id.gif_window)
 
-            // Set Header and description
-            popupHeader.text = "SUCCESS"
-            popupText.text = "Your contract renewal has been sent to our email."
-            btnYes.text = "OK"
+                // Set Header and description
+                popupHeader.text = "SUCCESS"
+                popupText.text = "Your contract renewal has been sent to our email."
+                btnYes.text = "OK"
 
-            popupGif.visibility = View.VISIBLE
-            btnNo.visibility = View.GONE
-            backButton.visibility = View.GONE
+                popupGif.visibility = View.VISIBLE
+                btnNo.visibility = View.GONE
+                backButton.visibility = View.GONE
 
-            //Make pop-window as Dialog
-            val myPopup= Dialog(context)
-            myPopup.setContentView(popupBinding)
+                //Make pop-window as Dialog
+                val myPopup= Dialog(context)
+                myPopup.setContentView(popupBinding)
 
-            //Display pop-up window
-            myPopup.setCancelable(true)
-            myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            myPopup.show()
+                //Display pop-up window
+                myPopup.setCancelable(true)
+                myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                myPopup.show()
 
-            btnYes.setOnClickListener {
-                myPopup.dismiss()
+                btnYes.setOnClickListener {
+                    myPopup.dismiss()
+                }
             }
         } else {
             context.startActivity(Intent(context, LoginActivity::class.java))
