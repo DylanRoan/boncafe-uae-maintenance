@@ -21,10 +21,24 @@
         android:textStyle="bold"
         tools:ignore="HardcodedText,UnusedAttribute" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_below="@id/textView"
+        android:fontFamily="@font/montserratt"
+        android:text="(Skip this part, this currently doesn't work due to technical implementations)"
+        android:textColor="#ff0000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="5dp"
+        tools:ignore="HardcodedText,UnusedAttribute" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView"
+        android:layout_below="@id/textView2"
         android:layout_above="@id/btn_uploadPhoto">
 
         <LinearLayout

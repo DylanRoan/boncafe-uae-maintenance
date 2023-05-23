@@ -48,19 +48,4 @@
             android:title="Logout"
             tools:ignore="HardcodedText" />
     </group>
-<!--
-    <group
-        android:checkableBehavior="single">
-        <item android:title="Our Social Medias"
-            tools:ignore="HardcodedText">
-            <menu>
-                <item
-                    android:id="@+id/facebook"
-                    android:icon="@drawable/icon_facebook"
-                    android:title="Facebook"
-                    tools:ignore="HardcodedText" />
-            </menu>
-        </item>
-    </group>-->
-
 </menu>

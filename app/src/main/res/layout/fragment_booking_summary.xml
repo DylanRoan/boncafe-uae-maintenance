@@ -155,6 +155,17 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText,UnusedAttribute" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:fontFamily="@font/montserratt"
+                android:text="(This is sample only. Images will not be sent)"
+                android:textColor="#C5C5C5"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,UnusedAttribute" />
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

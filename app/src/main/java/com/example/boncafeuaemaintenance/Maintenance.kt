@@ -119,11 +119,10 @@ class Maintenance : Fragment() {
                     contract.getString("end_date")
                 )
 
-                // Set maintenance and contract layout visibility
+                // Set maintenance layout, contract layout, no products layout visibility
                 contractPeriodLayout.visibility = View.VISIBLE
                 lastMaintenanceLayout.visibility = View.VISIBLE
                 noProductsContractLayout.visibility = View.GONE
-
             }
         }
         else
