@@ -190,7 +190,7 @@ class NetworkFunctions {
             .build()
 
         val request = Request.Builder()
-            .url("http://boncafe-backend.herokuapp.com/email")
+            .url("https://boncafe-backend.herokuapp.com/email")
             .post(formBody)
             .build()
 
